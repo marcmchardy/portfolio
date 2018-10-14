@@ -1,0 +1,48 @@
+$font-base : 16
+$h1 : $font-base * 1.6
+
+@mixin font-size($size)
+    font-size: $size + px
+
+@font-face
+    font-family: 'IsidoraSans'
+    font-weight: '200'
+    src: url('/webfonts/34B17E_E_0.eot')
+    src: url('/webfonts/34B17E_E_0.eot?#iefix') format('embedded-opentype'),url('/webfonts/34B17E_E_0.woff2') format('woff2'),url('/webfonts/34B17E_E_0.woff') format('woff'),url('/webfonts/34B17E_E_0.ttf') format('truetype')
+
+
+html, body
+    padding: 0
+    margin: 0
+    font-family: IsidoraSans, Arial, Helvetica, sans-serif
+    @include font-size($font-base)
+
+h1
+    @include font-size($h1)
+    font-weight: 600
+    margin-top: 0
+
+p:last-child
+    margin-bottom: 0
+    
+.contact-card_container
+    display: flex
+    min-height: 100vh
+    align-content: center
+    align-items: flex-start
+
+.contact-card
+    width: 40ch
+    position: relative
+    padding-left: 16px
+    margin: auto auto
+    &:before
+        content: ''
+        display: inline-block
+        position: absolute
+        width: 4px
+        top: 0
+        left: 0
+        height: 100%
+        border-radius: 2px
+        background-color: #000
