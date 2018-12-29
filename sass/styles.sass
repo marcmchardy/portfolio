@@ -16,6 +16,8 @@ html, body
     margin: 0
     font-family: IsidoraSans, Arial, Helvetica, sans-serif
     @include font-size($font-base)
+    @media print
+        font-size: 14px
 
 h1
     @include font-size($h1)
@@ -37,7 +39,7 @@ p:last-child
 .row
     display: flex
     flex-wrap: wrap
-    @media (min-width : 768px)
+    @media (min-width : 768px), print
         flex-wrap: nowrap
 .col
     margin-right: 1em
@@ -46,19 +48,19 @@ p:last-child
     &--1
         position: relative
         width: 100%
-        @media (min-width : 768px)
+        @media (min-width : 768px), print
             width: auto
             flex: 1
     &--2
         position: relative
         width: 100%
-        @media (min-width : 768px)
+        @media (min-width : 768px), print
             width: auto
             flex: 2
     &--4
         position: relative
         width: 100%
-        @media (min-width : 768px)
+        @media (min-width : 768px), print
             width: auto
             flex: 4
     &--vert-bottom
@@ -70,8 +72,10 @@ p:last-child
     display: block
     max-width: 1100px
     margin: 1em auto 5em
-    @media (min-width : 768px)
+    @media (min-width : 768px), print
         margin: 2.5em auto 5em
+    @media print
+        margin: 0
     &_home-link
         color: black
         margin: 1em auto
@@ -80,6 +84,8 @@ p:last-child
         opacity: 0.6
         &:hover
             opacity: 1
+        @media print
+            display: none
 
     &_link
         color: black
@@ -98,7 +104,7 @@ p:last-child
         max-width: 100%
         display: block
         margin-bottom: 2em
-        @media (min-width : 768px)
+        @media (min-width : 768px), print
             margin-bottom: 0
     &_blurb
         margin-bottom: 2em
@@ -110,7 +116,7 @@ p:last-child
         border-bottom: 1px solid #666
         padding-bottom: 2em
         margin-bottom: 2em
-        @media (min-width : 768px)
+        @media (min-width : 768px), print
             border-bottom: none
     &_list
         li
