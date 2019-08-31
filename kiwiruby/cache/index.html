@@ -15,9 +15,7 @@
     <meta content="https://kiwi.ruby.nz/" property="og:url" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <base href="/kiwiruby/">
-
+  
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/main.css?v=0.13">
   
@@ -79,7 +77,10 @@
             <li class="kr-nav_item column column--0">
                 <a class="kr-nav_link" href="../speakers" tabindex="2" accesskey="s">Speakers</a>
             </li>
-            
+            <!--removeIf(live)-->
+            <li class="kr-nav_item column column--0">
+                <a class="kr-nav_link" href="../events" tabindex="3" accesskey="e">Events</a>
+            </li>
             <li class="kr-nav_item column column--0">
                 <a class="kr-nav_link" href="../sponsors" tabindex="4" accesskey="p">Sponsors</a>
             </li>
@@ -87,14 +88,15 @@
                 <a class="kr-nav_link" href="../childcare" tabindex="5" accesskey="c">Childcare</a>
             </li>
             <li class="kr-nav_item column column--0">
-                <a class="kr-nav_link" href="../diversity-scholarship" tabindex="6" accesskey="c">Diversity Scholarship</a>            </li>
-            
+                <a class="kr-nav_link" href="../diversity-scholarship" tabindex="6" accesskey="c">Diversity Scholarship</a>
+            </li>
+            <!-- endremoveIf()-->
         </ul>
         
     </nav>
     
 
-    <section class="kr-content kr-content--main u-wrapper-margins">
+    <section class="kr-content u-wrapper-margins">
         
   <div class="row row--narrow row--small-column row--reverse-small">
     <div class="column column--4 kr-details">
@@ -171,7 +173,21 @@
 
 
         <div class="row row--narrow row--small-column u-mt-30">
-            
+            <!--removeIf(notlive)-->
+
+            <div class="column column--3 kr-card kr-card--sponsor">
+                <div  class="kr-content_inner--sponsor">
+                    <h2 class="kr-details_title">Moa sponsor</h2>
+                    <a href="https://buildkite.com/" class="kr-sponsor-logo_link" target="_blank">
+                        <img src="../img/sponsors/buildkite-logo-small.png" class="kr-sponsor-logo"/>
+                    </a>
+                    <p class="kr-p--note u-mt-10">
+                        Lightning fast testing and delivery for all your software projects.
+                        Buildkite is a platform for running fast, secure, and scalable continuous integration pipelines on your own infrastructure.
+                    </p>
+                </div>
+            </div>
+            <!--endremoveIf(notlive)-->
 
             <div class="column column--6 u-mt-30">
                 <div class="row row--narrow">
@@ -240,7 +256,6 @@
             </div>
 
         </div>
-
     
     </section>
 

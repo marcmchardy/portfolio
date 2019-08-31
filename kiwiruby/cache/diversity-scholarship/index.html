@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Kiwi Ruby</title>
+    <title>Diversity Scholarship - Kiwi Ruby</title>
     
     <meta content="Kiwi Ruby is a Ruby conference being held in Wellington, New Zealand on November 1st 2019. It will be very good." name="description" property="og:description" />
     <meta content="/social-image.png" property="og:image" />
@@ -15,9 +15,7 @@
     <meta content="https://kiwi.ruby.nz/" property="og:url" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <base href="/kiwiruby/">
-
+  
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/main.css?v=0.13">
   
@@ -40,33 +38,23 @@
     </script>
 
 </head>
-<body class="home">
+<body class="sub">
     <!--[if IE]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
     
     
-<header id="kr-header" class="kr-banner row row--narrow">
-  <div class="column column--4">
-    <div  class="kr-content_inner">
-      <h1 class="kr-logo">
-        <span class="hidden">Kiwi Ruby </span>
-        <img src="../img/kiwi-ruby-logo.svg?v=0.1" class="kr-paralax" paralax="0.5"/>
-      </h1>
-    </div>
-  </div>
-
-  <div class="column column--6">
-    <div  class="kr-content_inner">
-
-    </div>
-  </div>
+<header id="kr-header" class="kr-header--sub-page">
+  <h1 class="kr-logo kr-logo--sub-page">
+    <span class="hidden">Kiwi Ruby </span>
+    <a href="/">
+      <img src="../img/kiwi-ruby-logo.svg?v=0.1"/>
+    </a>
+  </h1>
 </header>
 
 
-    
-  <div class="kr-banner_footer u-wrapper-margins"></div>
-
+    <!-- build:banner-footer -->
 
     
     <input class="menu-checkbox" type="checkbox" id="menu" name="menu" />
@@ -79,7 +67,10 @@
             <li class="kr-nav_item column column--0">
                 <a class="kr-nav_link" href="../speakers" tabindex="2" accesskey="s">Speakers</a>
             </li>
-            
+            <!--removeIf(live)-->
+            <li class="kr-nav_item column column--0">
+                <a class="kr-nav_link" href="../events" tabindex="3" accesskey="e">Events</a>
+            </li>
             <li class="kr-nav_item column column--0">
                 <a class="kr-nav_link" href="../sponsors" tabindex="4" accesskey="p">Sponsors</a>
             </li>
@@ -87,76 +78,57 @@
                 <a class="kr-nav_link" href="../childcare" tabindex="5" accesskey="c">Childcare</a>
             </li>
             <li class="kr-nav_item column column--0">
-                <a class="kr-nav_link" href="../diversity-scholarship" tabindex="6" accesskey="c">Diversity Scholarship</a>            </li>
-            
+                <a class="kr-nav_link" href="../diversity-scholarship" tabindex="6" accesskey="c">Diversity Scholarship</a>
+            </li>
+            <!-- endremoveIf()-->
         </ul>
         
     </nav>
     
 
-    <section class="kr-content kr-content--main u-wrapper-margins">
+    <section class="kr-content u-wrapper-margins">
         
-  <div class="row row--narrow row--small-column row--reverse-small">
-    <div class="column column--4 kr-details">
-      <div  class="kr-content_inner">
+<div class="row row--narrow row--small-column row--reverse-small">
 
-        <h3 class="kr-details_title u-mt-10 u-mb-0 u-viewable--large"><strong>1st of November 2019</strong></h3>
-        <p class="u-mt-10 u-viewable--large">Te Papa, Wellington</p>
-      </div>
-    </div>
     <div class="column column--6">
       <div  class="kr-content_inner">
-        <img class="kr-content_feature-img kr-paralax" paralax="0.1" src="../img/banner_illo.png"/>
-        <h2 class="kr-content_title u-mt-10">A Ruby conference held in <a class="text-shadow" href="https://goo.gl/maps/JYhEif3r5jncc49s5" target="_blank">Wellington, New Zealand</a>.</h2>
+        <h2 class="kr-content_title u-mt-10">We want to support people with different voices and ideas to attend Kiwi Ruby</h2>
         <p class="kr-content_para">
-          With a mixture of local and international speakers, there will be one single-track day of talks. We'll cover topics that interest, excite, and delight Rubyists and the Ruby-curious of all levels.
-        </p>
-
-        <h3 class="kr-details_title u-mt-10 u-mb-0 u-viewable--small"><strong>1st of November 2019</strong></h3>
-        <p class="u-mt-10 u-viewable--small">More details on the way</p>
-
-        <a class="kr-btn kr-btn--twitter" href="http://twitter.com/kiwirubyconf" target="_blank"><span>@kiwirubyconf</span></a>
+            The Ruby community should reflect the diversity and vibrancy of New Zealand, and people from underrepresented backgrounds should have the opportunity to participate fully in our community.
+          </p>
+          <p class="kr-content_para">
+            The Diversity Scholarship is for people who would otherwise not be able to afford to make it to Kiwi Ruby, but would benefit from attending.
+          </p>
+          <p><strong>We will be opening up diversity scholarship applications closer to the event.</strong></p>
 
       </div>
 
       <div class="kr-card u-mt-35">
-        <h2 class="kr-details_title u-mb-0">We're looking for sponsors</h2>
-        <p class="u-mt-10">
-          If you're interested in becoming a sponsor please send us an email, we'd love to hear from you <a href="mailto:kiwi@ruby.nz">kiwi@ruby.nz</a>
-        </p>
+        <h2 class="kr-details_title u-mb-0">Made possible by</h2>
+
+      
+          <div class="row row--narrow">
+              
+            <div class="column column--3">
+                    <a href="https://ackama.com" class="kr-sponsor-logo_link" target="_blank">
+                        <img src="../img/sponsors/ackama-logo.png" class="kr-sponsor-logo kr-sponsor-logo--secondary"/>
+                    </a>
+                    <p class="kr-p--note u-mt-10">
+                      Experts in strategy, design and technology.
+                      Whether it's a new product, improved systems or organisational change, our team is the key to your technology goals.
+                    </p>
+                    <p class="kr-p--note u-mt-10">
+                      We believe that diversity is an important part of any healthy culture, and ensures a range of knowledge and experience can be brought to bear in developing solutions. We are proud to be providing scholarships to Kiwi Ruby and encouraging the growth of diversity in the Wellington technology culture.
+                    </p>
+            </div>
+          </div>
+
       </div>
-
+    </div>
+    <div class="column column--3">
+  
     </div>
   </div>
-  <div class="kr-speakers">
-    <div class="kr-speakers_item">
-        <img class="kr-speakers_speaker-photo" src="../img/speakers/speaker-rose-small.jpg" alt="Rose Lu" />
-    </div>
-    <div class="kr-speakers_item">
-        <img class="kr-speakers_speaker-photo" src="../img/speakers/speaker-michael-small.jpg" alt="Michael Dowse" />
-    </div>
-    <div class="kr-speakers_item">
-        <img class="kr-speakers_speaker-photo" src="../img/speakers/speaker-lena-small.jpg" alt="Lena Plaksina" />
-    </div>
-    <div class="kr-speakers_item">
-        <img class="kr-speakers_speaker-photo" src="../img/speakers/speaker-julianna-small.jpg" alt="Julianna Roen" />
-    </div>
-    <div class="kr-speakers_item">
-        <img class="kr-speakers_speaker-photo" src="../img/speakers/speaker-nick-small.jpg" alt="Nick Johnstone" />
-    </div>
-  </div>
-  <div class="kr-speakers-detail">
-    <div>
-      <p class="u-mt-0 u-mb-10">
-        More speakers to be announced soon
-      </p>
-    </div>
-    <div>
-      <a class="kr-btn u-mt-10" href="/speakers">Read more about the speakers</a>
-    </div>
-  </div>
-
-
   <hr class="u-rule--ruby">
 
     </section>
@@ -171,7 +143,21 @@
 
 
         <div class="row row--narrow row--small-column u-mt-30">
-            
+            <!--removeIf(notlive)-->
+
+            <div class="column column--3 kr-card kr-card--sponsor">
+                <div  class="kr-content_inner--sponsor">
+                    <h2 class="kr-details_title">Moa sponsor</h2>
+                    <a href="https://buildkite.com/" class="kr-sponsor-logo_link" target="_blank">
+                        <img src="../img/sponsors/buildkite-logo-small.png" class="kr-sponsor-logo"/>
+                    </a>
+                    <p class="kr-p--note u-mt-10">
+                        Lightning fast testing and delivery for all your software projects.
+                        Buildkite is a platform for running fast, secure, and scalable continuous integration pipelines on your own infrastructure.
+                    </p>
+                </div>
+            </div>
+            <!--endremoveIf(notlive)-->
 
             <div class="column column--6 u-mt-30">
                 <div class="row row--narrow">
@@ -240,7 +226,6 @@
             </div>
 
         </div>
-
     
     </section>
 
