@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         data: {
             name: 'Six weeks in Japan',
             currentLocation: {lat: -36.8485, lng: 174.7633},
+            currentIndex: 0,
             currentMarker: null,
             defaultMarker: { 
                 path: 'M 0, 0 m -20, 0 a 20,20 0 1,0 40,0 a 20,20 0 1,0 -40,0',
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name : 'Wellington, New Zealand',
                     location : {lat: -41.2865, lng: 174.7762},
-                    start : 'Tue, 7 Jan 2020 12:30:00 GMT+13',
+                    start : 'Wed, 15 Jan 2020 09:30:00 GMT+13',
                     end : 'Wed, 15 Jan 2020 18:30:00 GMT+13',
                     notes : 'Normal day of work, have to pack and double check weight of bag',
                     days : [
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             activities: [ 
                                 {
                                     name : 'Transit',
-                                    desc : 'Fly to Auckland at 6:30pm',
+                                    desc : 'Fly to Auckland, flight at 6:45pm',
                                 },
                             ]
                         },
@@ -69,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     location : {lat: -36.8485, lng: 174.7633},
                     start : 'Wed, 15 Jan 2020 18:30:00 GMT+13',
                     end : 'Thu, 16 Jan 2020 14:00:00 GMT+13',
-                    notes : 'Need to be at the airport by aboput 11am (3hrs before flight)',
+                    notes : 'Depart Auckland 2:05pm. Need to be at the airport by about 11am (3hrs before flight)',
                     days : [
                         {
                             date : 'Thu, 16th',
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     location : {lat: 35.6762, lng: 139.6503},
                     start : 'Fri, 17 Jan 2020 18:30:00 GMT+9',
                     end : 'Sat, 25 Jan 2020 20:15:00 GMT+9',
-                    notes : '',
+                    notes : '• Buy a prepaid <a href="https://www.jreast.co.jp/e/pass/suica.html" target="_blank">SUICA card</a>, for local transit.',
                     days : [
                         {
                             date : 'Fri, 17th',                            
@@ -122,6 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 {
                                     name : 'Arrive',
                                     desc : 'Land at Narita airport, terminal 2, get bus to Hostel $14'
+                                },
+                                {
+                                    name : 'Accom',
+                                    desc : '<a href="https://goo.gl/maps/UqQPkSrFSxXwuALN8" target="_blank">Nui Hostel, Tokyo</a>'
                                 },
                             ]
                         },
@@ -210,8 +215,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             date : 'Sat 25th',                            
                             activities: [ 
                                 {
-                                    name : '',
-                                    desc : ''
+                                    name : 'Accom',
+                                    desc : '<a href="https://goo.gl/maps/orZ71nHY1xMXjGMH9" target="_blank">Gonola Hotel, Hakuba</a>'
                                 },
                             ]
                         },
@@ -294,6 +299,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                     name : 'Arrive in Osaka',
                                     desc : ''
                                 },
+                                {
+                                    name : 'Accom',
+                                    desc : '<a href="https://g.page/jhoppers-osaka-guesthouse?share" target="_blank">J-Hoppers Osaka Guesthouse</a>'
+                                },
                             ]
                         },
                         {
@@ -357,6 +366,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                     name : 'Arrive in Kyoto',
                                     desc : ''
                                 },
+                                {
+                                    name : 'Accom',
+                                    desc : '<a href="https://goo.gl/maps/o3AdBfh1XRXGvnom6" target="_blank">Mosaic Hostel, Kyoto</a>'
+                                },
                             ]
                         },
                         {
@@ -411,14 +424,18 @@ document.addEventListener('DOMContentLoaded', function() {
                                     name : '6:30am Train to Hirafu',
                                     desc : 'All day train ride'
                                 },
+                                {
+                                    name : 'Accom',
+                                    desc : 'One night booked at <a href="https://goo.gl/maps/KbRLPSTkKzgSEcAo6" target="_blank">Ekinoyado Hirafu</a>'
+                                },
                             ]
                         },
                         {
                             date : 'Tue 11th',                            
                             activities: [ 
                                 {
-                                    name : '',
-                                    desc : ''
+                                    name : 'Accom',
+                                    desc : 'Seven nights booked at <a href="https://goo.gl/maps/XN1ENE1FwkiFBAWp9" target="_blank">MyEcoLodge, Kutchan</a>'
                                 },
                             ]
                         },
@@ -480,22 +497,22 @@ document.addEventListener('DOMContentLoaded', function() {
                             date : 'Tue 18th',                            
                             activities: [ 
                                 {
-                                    name : '',
-                                    desc : ''
+                                    name : 'Last night in Accom',
+                                    desc : 'Checkout from MyEcoLodge, Kutchan'
                                 },
                             ]
                         },
-                    ]
-                },
-                {
-                    name : 'Seoul, Korea',
-                    location : {lat: 37.566536, lng: 126.977966},
-                    start : 'Tue, 18 Feb 2020 20:15:00 GMT+9',
-                    end : 'Mon, 24 Feb 2020 20:15:00 GMT+9',
-                    notes : '',
-                    days : [
                         {
-                            date : 'Tue 18th',                            
+                            date : 'Wed 19th',                            
+                            activities: [ 
+                                {
+                                    name : 'No plans',
+                                    desc : 'Am leaving the rest of the trip open at this stage to see what happens'
+                                },
+                            ]
+                        },
+                        {
+                            date : 'Thu 20st',                            
                             activities: [ 
                                 {
                                     name : '',
@@ -504,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ]
                         },
                         {
-                            date : 'Wed 20th',                            
+                            date : 'Fri 21st',                            
                             activities: [ 
                                 {
                                     name : '',
@@ -513,7 +530,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ]
                         },
                         {
-                            date : 'Thu 21st',                            
+                            date : 'Sat 22nd',                            
                             activities: [ 
                                 {
                                     name : '',
@@ -522,7 +539,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ]
                         },
                         {
-                            date : 'Fri 22nd',                            
+                            date : 'Sun 23rd',                            
                             activities: [ 
                                 {
                                     name : '',
@@ -531,25 +548,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ]
                         },
                         {
-                            date : 'Sat 28rd',                            
-                            activities: [ 
-                                {
-                                    name : '',
-                                    desc : ''
-                                },
-                            ]
-                        },
-                        {
-                            date : 'Sun 24th',                            
-                            activities: [ 
-                                {
-                                    name : '',
-                                    desc : ''
-                                },
-                            ]
-                        },
-                        {
-                            date : 'Mon 25th',                            
+                            date : 'Mon 24th',                            
                             activities: [ 
                                 {
                                     name : '',
@@ -617,6 +616,9 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
         },
         computed: {
+            maxIndex: function(){
+                return this.itinerary.length - 1;
+            },
             locations: function () {
                 locs = [];
                 
@@ -634,18 +636,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentMarker = this.currentMarker;
                 defaultMarker = this.defaultMarker;
                 newLocations = [];
+                
 
-                this.itinerary.forEach(function(item) {
+                this.itinerary.forEach(function(item, index) {
                     thisStartDate = new Date(item.start);
                     thisEndDate = new Date(item.end);
 
                     newItem = item;
                     newItem.marker = defaultMarker;
+                    outOfDate = true
 
                     if(todaysDate >= thisStartDate && todaysDate <= thisEndDate){
                         newLocation = item.location;
                         item.marker = currentMarker;
+                        this.currentIndex = index;
+                        outOfDate = false
                     } 
+                    // set the map pointer marker to the start point if we're out of travel dates
+                    if (outOfDate == true && index == 0) newItem.marker = currentMarker;
+
                     newLocations.push(newItem);
 
                 });
@@ -659,8 +668,14 @@ document.addEventListener('DOMContentLoaded', function() {
         methods: {
             centreTo: function(index) {
                 coords = this.itinerary[index].location;
+                this.currentIndex = index;
                 this.$refs.yonderMap.$mapObject.panTo(coords)
                 this.updateMarker(index);
+            },
+            navigate: function(index, state){
+                if(state == 'prev' && index > 0) this.currentIndex = index - 1;
+                if(state == 'next' && index < this.maxIndex) this.currentIndex = index + 1;
+                this.selectMarker(this.currentIndex);
             },
             updateMarker: function(index) {
                 this.$refs.marker.forEach(function(item){

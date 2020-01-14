@@ -65,6 +65,46 @@ p {
         background-color: rgba(51, 0, 255, 0.10);
     }
 }
+.navigation {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    &_item {
+        background: #fff;
+        color: transparent;
+        box-shadow: 1px 0 3px rgba(0,0,0,0.2);
+        border-radius: 100%;
+        padding: 20px;
+        margin-top: 10px;
+        position: relative;
+        height: 50px;
+        width: 50px;
+        cursor: pointer;
+        outline: transparent;
+        &:before {
+            content: '';
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+            display: block;
+        }
+        &-prev:before {
+            transform: rotate(225deg);
+        }
+        &-next:before {
+            transform: rotate(45deg);
+        }
+        &:disabled {
+            background: #ececec;
+            &:before {
+                opacity: 0.25;
+            }
+        }
+    }
+}
 .activity_list {
     margin: 0;
     padding: 0;
@@ -93,6 +133,12 @@ p {
     }
     &-of-hidden {
         overflow: hidden;
+    }
+    &-small-v-30 {
+        max-height: 30vh;
+        @media screen and (min-width: 768px) {
+            max-height: 100%;
+        }
     }
     @for $i from 1 through 9 {
         &-opacity--#{$i} {
