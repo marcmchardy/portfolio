@@ -113,6 +113,7 @@ p {
     cursor: pointer;
     border: none;
     outline: transparent;
+    -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -122,6 +123,9 @@ p {
     .navigation_item:active {
       outline: none;
       border: none; }
+    .navigation_item :focus {
+      outline: none !important;
+      border: none; }
     .navigation_item:selection {
       background-color: transparent;
       outline: none;
@@ -129,14 +133,19 @@ p {
     .navigation_item:before {
       content: '';
       border: solid black;
-      border-width: 0 3px 3px 0;
+      border-width: 0 4px 4px 0;
       display: inline-block;
-      padding: 3px;
-      display: block; }
+      padding: 4px;
+      display: block;
+      height: 0;
+      width: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%; }
     .navigation_item-prev:before {
-      transform: rotate(225deg); }
+      transform: translate(-50%, -50%) rotate(225deg); }
     .navigation_item-next:before {
-      transform: rotate(45deg); }
+      transform: translate(-50%, -50%) rotate(45deg); }
     .navigation_item:disabled {
       background: #ececec; }
       .navigation_item:disabled:before {

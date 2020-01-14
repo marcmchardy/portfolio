@@ -84,6 +84,7 @@ p {
         cursor: pointer;
         border: none;
         outline: transparent;
+        -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
@@ -94,6 +95,10 @@ p {
             outline: none;
             border: none;
         }
+        :focus {
+            outline: none !important;
+            border: none;
+        }
         &:selection {
             background-color: transparent;
             outline: none;
@@ -102,16 +107,21 @@ p {
         &:before {
             content: '';
             border: solid black;
-            border-width: 0 3px 3px 0;
+            border-width: 0 4px 4px 0;
             display: inline-block;
-            padding: 3px;
+            padding: 4px;
             display: block;
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
         }
         &-prev:before {
-            transform: rotate(225deg);
+            transform: translate(-50%, -50%) rotate(225deg);
         }
         &-next:before {
-            transform: rotate(45deg);
+            transform: translate(-50%, -50%) rotate(45deg);
         }
         &:disabled {
             background: #ececec;
