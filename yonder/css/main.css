@@ -113,6 +113,13 @@ p {
     cursor: pointer;
     border: none;
     outline: transparent; }
+    .navigation_item:active {
+      outline: none;
+      border: none; }
+    .navigation_item:selection {
+      background-color: transparent;
+      outline: none;
+      border: none; }
     .navigation_item:before {
       content: '';
       border: solid black;

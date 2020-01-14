@@ -84,6 +84,15 @@ p {
         cursor: pointer;
         border: none;
         outline: transparent;
+        &:active {
+            outline: none;
+            border: none;
+        }
+        &:selection {
+            background-color: transparent;
+            outline: none;
+            border: none;
+        }
         &:before {
             content: '';
             border: solid black;
