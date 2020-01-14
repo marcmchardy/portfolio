@@ -112,7 +112,8 @@ p {
     width: 50px;
     cursor: pointer;
     border: none;
-    outline: transparent; }
+    outline: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
     .navigation_item:active {
       outline: none;
       border: none; }

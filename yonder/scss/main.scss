@@ -84,6 +84,7 @@ p {
         cursor: pointer;
         border: none;
         outline: transparent;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
         &:active {
             outline: none;
             border: none;
