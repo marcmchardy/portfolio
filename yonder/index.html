@@ -14,7 +14,7 @@
     <script src="js/vue-google-maps.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,600|Nunito+Sans:300,400|Source+Code+Pro&display=swap" rel="stylesheet">    <meta name="theme-color" content="#fafafa">
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,600|Gravitas+One|Nunito+Sans:300,400|Source+Code+Pro&display=swap" rel="stylesheet">    <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
@@ -59,13 +59,13 @@
             </div>
 
             <div ref="scroller" id="scroller" class="col--1 u-full-height u-scroll-y">
-                <h1 class="u-m--10 u-m--15 u-p--15 u-opacity--7">{{ name }}</h1>
+                <h1 class="u-m--10 u-m--15 u-p--15 u-opacity--7" v-html="name"></h1>
                 <div class="card card--white u-m--10" v-for="(dest, index) in itinerary" v-bind:id="'dest-'+ index" ref="destinations">
                     <div class="card_inner">
                         <h2 class="u-action-link u-m--10" v-on:click="centreTo(index)">{{dest.name}}</h2>
                         <time class="u-m--10">{{dest.start | simpleDate}}–{{dest.end | simpleDate}}</time class=" u-m--5">
                         <p class="u-m--10 u-mb--20" v-html="dest.notes"></p>
-                        <div class="card card--purple u-mb--10" v-for="day in dest.days">
+                        <div class="card card--no-shadow card--purple u-mb--10" v-for="day in dest.days">
                             <div class="u-p--10">
                                 <time>{{day.date}}</time>
                             </div>
