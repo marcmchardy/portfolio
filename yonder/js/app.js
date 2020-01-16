@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     name : 'Nadi, Fiji',
                     location : {lat: -17.7765, lng: 177.4356},
                     start : 'Thur, 16 Jan 2020 18:30:00 GMT+12',
-                    end : 'Fri, 17 Jan 2020 09:05:00 GMT+12',
+                    end : 'Fri, 17 Jan 2020 14:05:00 GMT+12',
                     notes : '',
                     days : [
                         {
