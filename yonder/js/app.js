@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 fillOpacity: 1,
                 scale: 0.4,
                 strokeColor: 'white',
-                strokeWeight: 1
+                strokeWeight: 1,
+                zIndex: 1
             },
             selectedMarker: { 
                 path: 'M 0, 0 m -20, 0 a 20,20 0 1,0 40,0 a 20,20 0 1,0 -40,0',
@@ -44,7 +45,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 fillOpacity: 1,
                 scale: 0.5,
                 strokeColor: 'white',
-                strokeWeight: 1
+                strokeWeight: 1,
+                zIndex: 100
+            },
+            transitMarker: { 
+                path: 'M-1.2-8.9c0-1.5,2.3-1.5,2.3,0v6.4L10,2.9v2.4L1.1,2.3v4.8l2.1,1.6v1.9L0,9.6l-3.2,1V8.7l2-1.6V2.3L-10,5.3V2.9l8.8-5.4 V-8.9z',
+                fillColor: '#FFFFFF',
+                fillOpacity: 1,
+                scale: 2.5,
+                strokeColor: 'gray',
+                strokeWeight: 1,
+                zIndex: 50
             },
             itinerary : [
                 {
@@ -87,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     name : 'Nadi, Fiji',
                     location : {lat: -17.7765, lng: 177.4356},
                     start : 'Thur, 16 Jan 2020 18:30:00 GMT+12',
-                    end : 'Fri, 17 Jan 2020 14:00:00 GMT+12',
+                    end : 'Fri, 17 Jan 2020 09:05:00 GMT+12',
                     notes : '',
                     days : [
                         {
@@ -113,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name : 'Tokyo, Japan',
                     location : {lat: 35.6762, lng: 139.6503},
-                    start : 'Fri, 17 Jan 2020 18:30:00 GMT+9',
+                    start : 'Fri, 17 Jan 2020 19:30:00 GMT+9',
                     end : 'Sat, 25 Jan 2020 20:15:00 GMT+9',
                     notes : '• Buy a prepaid <a href="https://www.jreast.co.jp/e/pass/suica.html" target="_blank">SUICA card</a>, for local transit.',
                     days : [
@@ -632,19 +643,34 @@ document.addEventListener('DOMContentLoaded', function() {
             locationMarks: function(){
                 todaysDate = new Date();
                 //this just gives a start point before the dates are figured out
-                newLocation = this.itinerary[0].location;
+                //newLocation = this.itinerary[0].location;
                 currentMarker = this.currentMarker;
                 defaultMarker = this.defaultMarker;
+                transitMarker = this.transitMarker;
                 newLocations = [];
+                prevEndDate = null;
                 
 
-                this.itinerary.forEach(function(item, index) {
+                this.itinerary.forEach(function(item, index, parentThis = this) {
+                    itinerary = parentThis;
                     thisStartDate = new Date(item.start);
                     thisEndDate = new Date(item.end);
+                    if(index != 0) prevEndDate = new Date(itinerary[index-1].end);
 
                     newItem = item;
                     newItem.marker = defaultMarker;
                     outOfDate = true
+
+                    // find out if we are between locations
+                    // if nowDate falls between the previous end date and the next startDate                        
+                    if(todaysDate > prevEndDate && todaysDate < thisStartDate){
+                        console.log('we\'re in transit mode')
+                        newLocation = item.location;
+                        item.marker = transitMarker;
+                        this.currentIndex = index;
+                        outOfDate = false
+                        // possibly set the polyline icon to the plane svg based on this flag, storing the icon like we store the marker
+                    }
 
                     if(todaysDate >= thisStartDate && todaysDate <= thisEndDate){
                         newLocation = item.location;
@@ -660,6 +686,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 this.currentLocation = newLocation;
+
 
                 return newLocations;
             },
@@ -683,14 +710,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         item.$markerObject.setIcon(this.defaultMarker);
                     } 
                 });
+                // this needs to be updated to deal with transit
                 if(this.$refs.marker[index].$markerObject.icon !== null) {
                     this.$refs.marker[index].$markerObject.setIcon(this.selectedMarker);
                 }
             },
             selectMarker: function(index) {
+                // if (!index) index = this.currentIndex;
                 this.centreTo(index);
+                this.scrollToCard(index);
+                
+            },
+            scrollToCard: function(index) {
                 VueScrollTo.scrollTo('#'+this.$refs.destinations[index].id, 500, {container: '#scroller'})
-            }
+            },
         },
         filters: {
             simpleDate: function (value) {
@@ -748,6 +781,8 @@ document.addEventListener('DOMContentLoaded', function() {
     Vue.nextTick(function () {
         //vm.updateLocation()
         console.log('tick');
+        vm.scrollToCard(this.currentIndex);
+
     });
 
 });
