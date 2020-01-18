@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: 'Six weeks in Japan',
             currentLocation: {lat: -36.8485, lng: 174.7633},
             currentIndex: 0,
+            transitIndex: 0,
             currentMarker: null,
             defaultMarker: { 
                 path: 'M 0, 0 m -20, 0 a 20,20 0 1,0 40,0 a 20,20 0 1,0 -40,0',
@@ -37,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 scale: 0.4,
                 strokeColor: 'white',
                 strokeWeight: 1,
-                zIndex: 1
             },
             selectedMarker: { 
                 path: 'M 0, 0 m -20, 0 a 20,20 0 1,0 40,0 a 20,20 0 1,0 -40,0',
@@ -46,16 +46,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 scale: 0.5,
                 strokeColor: 'white',
                 strokeWeight: 1,
-                zIndex: 100
             },
-            transitMarker: { 
-                path: 'M-1.2-8.9c0-1.5,2.3-1.5,2.3,0v6.4L10,2.9v2.4L1.1,2.3v4.8l2.1,1.6v1.9L0,9.6l-3.2,1V8.7l2-1.6V2.3L-10,5.3V2.9l8.8-5.4 V-8.9z',
-                fillColor: '#FFFFFF',
-                fillOpacity: 1,
-                scale: 2.5,
-                strokeColor: 'gray',
-                strokeWeight: 1,
-                zIndex: 50
+            polyArrow: { 
+                'strokeColor': '#FFFFFF',
+                'strokeOpacity': 0.7,
+                'strokeWeight': 2,
+                'geodesic': true,
+                icons: [{
+                    icon: {
+                        path: 'M-10 -10,0 -30, 10,-10 Z',
+                        fillColor: '#cccccc',
+                        fillOpacity: 1,
+                        strokeWeight: 1,
+                        strokeColor: 'white',
+                        scale: 0.6,
+                    },
+                    offset: '50%',
+                    repeat: '100px'
+                }]
+            },
+            polyTransit: { 
+                'strokeColor': '#FFFFFF',
+                'strokeOpacity': 0.7,
+                'strokeWeight': 2,
+                'geodesic': true,
+                icons: [{
+                    icon: {
+                        path: 'M-10 -10,0 -30, 10,-10 Z',
+                        fillColor: 'green',
+                        fillOpacity: 1,
+                        strokeWeight: 1.25,
+                        strokeColor: 'white',
+                        scale: 1,
+                    },
+                    offset: '50%',
+                    repeat: '100px'
+                }]
             },
             itinerary : [
                 {
@@ -133,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             activities: [ 
                                 {
                                     name : 'Arrive',
-                                    desc : 'Land at Narita airport, terminal 2, get bus to Hostel $14'
+                                    desc : 'Land at Narita airport, terminal 2, trained to town, walked 30 min to hostel'
                                 },
                                 {
                                     name : 'Accom',
@@ -145,8 +171,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             date : 'Sat, 18th',                            
                             activities: [ 
                                 {
-                                    name : '',
-                                    desc : ''
+                                    name : 'Ramen for lunch',
+                                    desc : 'Found a little place while waiting for the museum.'
+                                },
+                                {
+                                    name : 'Samurai Museum',
+                                    desc : 'Tour of Museum with a bit of history and a samurai demonstration.'
                                 },
                             ]
                         },
@@ -154,8 +184,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             date : 'Sun, 19th',                            
                             activities: [ 
                                 {
-                                    name : '',
-                                    desc : ''
+                                    name : 'Hike Mt Nokogiri in Chiba. Depends on weather.',
+                                    desc : 'Look at all the carvings and go for a bit of a hike. Wake up early, get a train out to chiba and find my way to <a href="https://goo.gl/maps/2jCrJs28dR2BFMnm9" target="_blank">nokogiriyama mountain</a>.'
                                 },
                             ]
                         },
@@ -163,8 +193,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             date : 'Mon, 20th',                            
                             activities: [ 
                                 {
-                                    name : '',
-                                    desc : ''
+                                    name : 'Robot Restaurant?',
+                                    desc : 'This is meant to be really weird but a fun time'
                                 },
                             ]
                         },
@@ -630,23 +660,28 @@ document.addEventListener('DOMContentLoaded', function() {
             maxIndex: function(){
                 return this.itinerary.length - 1;
             },
+
             locations: function () {
-                locs = [];
-                
-                this.itinerary.forEach(function(item) {
+                dualLocs = [];
 
-                    locs.push(item.location)
-
+                maxIndex = this.maxIndex;
+                this.itinerary.forEach(function(item, index, parentThis = this, maxIndex = this.maxIndex) {     
+                    if(index != maxIndex){
+                        dualLocs.push([item.location, parentThis[index+1].location]);
+                    }
                 });
-                return locs;
+                return dualLocs;
             },
+
             locationMarks: function(){
                 todaysDate = new Date();
                 //this just gives a start point before the dates are figured out
                 //newLocation = this.itinerary[0].location;
                 currentMarker = this.currentMarker;
                 defaultMarker = this.defaultMarker;
-                transitMarker = this.transitMarker;
+                polyArrow = this.polyArrow;
+                polyTransit = this.polyTransit;
+                
                 newLocations = [];
                 prevEndDate = null;
                 
@@ -659,27 +694,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     newItem = item;
                     newItem.marker = defaultMarker;
+                    newItem.polyIcon = polyArrow;
                     outOfDate = true
 
                     // find out if we are between locations
                     // if nowDate falls between the previous end date and the next startDate                        
-                    if(todaysDate > prevEndDate && todaysDate < thisStartDate){
+                    if(prevEndDate != null && todaysDate > prevEndDate && todaysDate < thisStartDate){
                         console.log('we\'re in transit mode')
                         newLocation = item.location;
-                        item.marker = transitMarker;
+                        newItem.marker = defaultMarker;
+                        newLocations[index-1].polyIcon = polyTransit;
                         this.currentIndex = index;
                         outOfDate = false
                         // possibly set the polyline icon to the plane svg based on this flag, storing the icon like we store the marker
                     }
 
                     if(todaysDate >= thisStartDate && todaysDate <= thisEndDate){
+                        //console.log('current location is ' + item.name)
                         newLocation = item.location;
-                        item.marker = currentMarker;
+                        newItem.marker = currentMarker;
                         this.currentIndex = index;
                         outOfDate = false
                     } 
+
                     // set the map pointer marker to the start point if we're out of travel dates
-                    if (outOfDate == true && index == 0) newItem.marker = currentMarker;
+                    // if (outOfDate == true && index == 0) newItem.marker = currentMarker;
 
                     newLocations.push(newItem);
 
@@ -782,6 +821,12 @@ document.addEventListener('DOMContentLoaded', function() {
         //vm.updateLocation()
         console.log('tick');
         vm.scrollToCard(this.currentIndex);
+
+        // test area
+
+        // console.log(dualLocs)
+        // console.log('locs')
+        //console.log(vm.locations)
 
     });
 

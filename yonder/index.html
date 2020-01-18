@@ -28,31 +28,27 @@
                         ref="marker"
                         :key="index"
                         v-for="(m, index) in locationMarks"
-                        :position="m.location",
-                        :icon="m.marker",
-                        :clickable="true",
+                        :position="m.location"
+                        :icon="m.marker"
+                        :clickable="true"
                         @click="selectMarker(index), updateMarker(index)"
                     />
+                    <!-- 
+                        To make polyline work with different colours / icons, may need to build an array of pairs of to-from coords
+                        and then place the gmap-polyline within a v-for loop
+                        each pair would have the corresponding icon
+                        Make triangle icon green and larger for current transit + work out middle point of two locations to centre map
+
+                        the var currentLocation should become a function and return the current location
+                        if we're in transit it should return the average of the two points and center on that
+
+                        look into a "bounds property"
+                     -->
                     <gmap-polyline 
-                        :path="locations",
-                        :options="{ 
-                            'strokeColor': '#FFFFFF',
-                            'strokeOpacity': 0.7,
-                            'strokeWeight': 2,
-                            'geodesic': true,
-                            icons: [{
-                                icon: {
-                                    path: 'M-10 -10,0 -30, 10,-10 Z',
-                                    fillColor: '#cccccc',
-                                    fillOpacity: 1,
-                                    strokeWeight: 1,
-                                    strokeColor: 'white',
-                                    scale: 0.6,
-                                },
-                                offset: '50%',
-                                repeat: '100px'
-                            }]
-                        }" 
+                        :key="index"
+                        v-for="(locPairs, index) in locations"
+                        :path="locPairs"
+                        :options="locationMarks[index].polyIcon" 
                         >
                     </gmap-polyline>
                 </google-map>
