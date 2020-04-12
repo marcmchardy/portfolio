@@ -75,8 +75,10 @@
                     </div>
                 </div>
                 <div class="navigation">
-                    <button class="navigation_item navigation_item-prev" :disabled="currentIndex == 0" v-on:click="navigate(currentIndex, 'prev')">Prev</button>
-                    <button class="navigation_item navigation_item-next" :disabled="currentIndex == maxIndex" v-on:click="navigate(currentIndex, 'next')">Next</button>
+                    {{navIndex}}
+                    {{currentIndex}}
+                    <button class="navigation_item navigation_item-prev" :disabled="navIndex == 0" @click="navigate(navIndex, 'prev')">Prev</button>
+                    <button class="navigation_item navigation_item-next" :disabled="navIndex == maxIndex" @click="navigate(navIndex, 'next')">Next</button>
                 </div>
             </div>
 

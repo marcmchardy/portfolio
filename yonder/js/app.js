@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
         data: {
             name: 'Six weeks in Japan',
             currentLocation: {lat: -36.8485, lng: 174.7633},
-            currentIndex: 0,
             transitIndex: 0,
+            currentIndex: 0,
             currentMarker: null,
             defaultMarker: { 
                 path: 'M 0, 0 m -20, 0 a 20,20 0 1,0 40,0 a 20,20 0 1,0 -40,0',
@@ -543,6 +543,24 @@ document.addEventListener('DOMContentLoaded', function() {
                                 },
                             ]
                         },
+                    ]
+                },
+                {
+                    name : 'Seoul, Korea',
+                    location : {lat: 37.5326, lng: 127.0246},
+                    start : 'Tue, 18 Feb 2020 17:15:00 GMT+9',
+                    end : 'Sat, 22 Feb 2020 12:20:00 GMT+9',
+                    notes : '',
+                    days : [
+                        {
+                            date : 'Tue 18th',                            
+                            activities: [ 
+                                {
+                                    name : '',
+                                    desc : ''
+                                },
+                            ]
+                        },
                         {
                             date : 'Wed 19th',                            
                             activities: [ 
@@ -553,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ]
                         },
                         {
-                            date : 'Thu 20st',                            
+                            date : 'Thu 20th',                            
                             activities: [ 
                                 {
                                     name : '',
@@ -579,6 +597,15 @@ document.addEventListener('DOMContentLoaded', function() {
                                 },
                             ]
                         },
+                    ]
+                },
+                {
+                    name : 'Busan, Korea',
+                    location : {lat: 35.1666, lng: 129.0666},
+                    start : 'Sat, 22 Feb 2020 15:15:00 GMT+9',
+                    end : 'Tue, 25 Feb 2020 15:30:00 GMT+9',
+                    notes : '',
+                    days : [
                         {
                             date : 'Sun 23rd',                            
                             activities: [ 
@@ -603,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     name : 'Tokyo, Japan',
                     location : {lat: 35.6762, lng: 139.6503},
-                    start : 'Tue, 25 Feb 2020 20:15:00 GMT+9',
+                    start : 'Tue, 25 Feb 2020 18:15:00 GMT+9',
                     end : 'Fri, 28 Feb 2020 20:15:00 GMT+9',
                     notes : '',
                     days : [
@@ -654,6 +681,24 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                     ]
                 },
+                {
+                    name : 'Auckland, New Zealand',
+                    location : {lat: -36.8485, lng: 174.7633},
+                    start : 'Sat, 29 Feb 2020 14:30:00 GMT+13',
+                    end : 'Sat, 29 Feb 2020 16:30:00 GMT+13',
+                    notes : 'Depart Auckland For Wellington',
+                    days : [
+                        {
+                            date : 'Sat, 29th',
+                            activities: [ 
+                                {
+                                    name : 'Leave for Wellington',
+                                    desc : 'Flight at 4:30pm',
+                                },
+                            ]
+                        }
+                    ]
+                },
             ],
         },
         computed: {
@@ -675,6 +720,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             locationMarks: function(){
                 todaysDate = new Date();
+                startDate = new Date(this.itinerary[0].start);
+                lastDate = new Date(this.itinerary[this.maxIndex].end);
                 //this just gives a start point before the dates are figured out
                 //newLocation = this.itinerary[0].location;
                 currentMarker = this.currentMarker;
@@ -688,14 +735,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 this.itinerary.forEach(function(item, index, parentThis = this) {
                     itinerary = parentThis;
-                    thisStartDate = new Date(item.start);
-                    thisEndDate = new Date(item.end);
-                    if(index != 0) prevEndDate = new Date(itinerary[index-1].end);
+                    thisStartDate = new Date(item.start); // start date of the location
+                    thisEndDate = new Date(item.end); // end date of the location
+
+                    if(index != 0) prevEndDate = new Date(itinerary[index-1].end); // the end date of the last location we were at
 
                     newItem = item;
                     newItem.marker = defaultMarker;
                     newItem.polyIcon = polyArrow;
                     outOfDate = true
+                    newLocation = null;
 
                     // find out if we are between locations
                     // if nowDate falls between the previous end date and the next startDate                        
@@ -704,44 +753,66 @@ document.addEventListener('DOMContentLoaded', function() {
                         newLocation = item.location;
                         newItem.marker = defaultMarker;
                         newLocations[index-1].polyIcon = polyTransit;
-                        this.currentIndex = index;
+                        this.navIndex = index;
                         outOfDate = false
                         // possibly set the polyline icon to the plane svg based on this flag, storing the icon like we store the marker
                     }
 
-                    if(todaysDate >= thisStartDate && todaysDate <= thisEndDate){
-                        //console.log('current location is ' + item.name)
+                    // we haven't started our trip ## to be tested
+                    if(todaysDate <= thisEndDate){
                         newLocation = item.location;
                         newItem.marker = currentMarker;
-                        this.currentIndex = index;
-                        outOfDate = false
-                    } 
+                        this.navIndex = index;
+                        outOfDate = true
+                    }
 
-                    // set the map pointer marker to the start point if we're out of travel dates
-                    // if (outOfDate == true && index == 0) newItem.marker = currentMarker;
+                    // we are on a current location
+                    if(todaysDate >= thisStartDate && todaysDate <= thisEndDate){
+                        newLocation = item.location;
+                        newItem.marker = currentMarker;
+                        this.navIndex = index;
+                        outOfDate = false
+                    }
+                
+
+                    // we either haven't started, or we have finished our trip
+                    if(todaysDate < startDate || todaysDate > lastDate ){
+                        newLocation = item.location;
+                        newItem.marker = currentMarker;
+                        this.navIndex = index;
+                        outOfDate = true
+                    }
 
                     newLocations.push(newItem);
 
                 });
-
-                this.currentLocation = newLocation;
-
+                if (newLocation) this.currentLocation = newLocation;
 
                 return newLocations;
+            },
+
+            navIndex: {
+                get: function(){
+                    return this.currentIndex;
+                },
+                set: function(newValue){
+                    this.currentIndex = newValue;
+                }
             },
         },
 
         methods: {
             centreTo: function(index) {
                 coords = this.itinerary[index].location;
-                this.currentIndex = index;
+                this.navIndex = index;
                 this.$refs.yonderMap.$mapObject.panTo(coords)
                 this.updateMarker(index);
             },
-            navigate: function(index, state){
-                if(state == 'prev' && index > 0) this.currentIndex = index - 1;
-                if(state == 'next' && index < this.maxIndex) this.currentIndex = index + 1;
-                this.selectMarker(this.currentIndex);
+            navigate: function(index = this.navIndex, state){
+                console.log('navigate: '+index);
+                if(state == 'prev' && index > 0) this.navIndex = index - 1;
+                if(state == 'next' && index < this.maxIndex) this.navIndex = index + 1;
+                this.selectMarker(this.navIndex);
             },
             updateMarker: function(index) {
                 this.$refs.marker.forEach(function(item){
@@ -753,6 +824,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(this.$refs.marker[index].$markerObject.icon !== null) {
                     this.$refs.marker[index].$markerObject.setIcon(this.selectedMarker);
                 }
+                this.$forceUpdate();
             },
             selectMarker: function(index) {
                 // if (!index) index = this.currentIndex;
@@ -819,14 +891,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     Vue.nextTick(function () {
         //vm.updateLocation()
-        console.log('tick');
-        vm.scrollToCard(this.currentIndex);
-
-        // test area
-
-        // console.log(dualLocs)
-        // console.log('locs')
-        //console.log(vm.locations)
+        console.log('tick '+this.navIndex);
+        vm.scrollToCard(this.navIndex)
 
     });
 
