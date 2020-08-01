@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
             name: 'Six weeks in Japan',
             currentLocation: {lat: -36.8485, lng: 174.7633},
             transitIndex: 0,
+            whereIs: [
+
+            ],
+            navIndex: 0,
             currentIndex: 0,
             currentMarker: null,
             defaultMarker: { 
@@ -723,7 +727,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 startDate = new Date(this.itinerary[0].start);
                 lastDate = new Date(this.itinerary[this.maxIndex].end);
                 //this just gives a start point before the dates are figured out
-                //newLocation = this.itinerary[0].location;
+                newLocation = null;
                 currentMarker = this.currentMarker;
                 defaultMarker = this.defaultMarker;
                 polyArrow = this.polyArrow;
@@ -743,8 +747,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     newItem = item;
                     newItem.marker = defaultMarker;
                     newItem.polyIcon = polyArrow;
-                    outOfDate = true
-                    newLocation = null;
 
                     // find out if we are between locations
                     // if nowDate falls between the previous end date and the next startDate                        
@@ -754,16 +756,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         newItem.marker = defaultMarker;
                         newLocations[index-1].polyIcon = polyTransit;
                         this.navIndex = index;
-                        outOfDate = false
                         // possibly set the polyline icon to the plane svg based on this flag, storing the icon like we store the marker
-                    }
-
-                    // we haven't started our trip ## to be tested
-                    if(todaysDate <= thisEndDate){
-                        newLocation = item.location;
-                        newItem.marker = currentMarker;
-                        this.navIndex = index;
-                        outOfDate = true
                     }
 
                     // we are on a current location
@@ -771,16 +764,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         newLocation = item.location;
                         newItem.marker = currentMarker;
                         this.navIndex = index;
-                        outOfDate = false
                     }
                 
-
+                    // this is the same as above!!!!!!!!!!!!!!
                     // we either haven't started, or we have finished our trip
+                    // this is currently checking to see if we are before or after any of our location dates
+                    // but it's not checking against any card dates so is applying to all
+                    // maybe make a state machine to handle the scenarios
                     if(todaysDate < startDate || todaysDate > lastDate ){
                         newLocation = item.location;
                         newItem.marker = currentMarker;
                         this.navIndex = index;
-                        outOfDate = true
                     }
 
                     newLocations.push(newItem);
@@ -789,15 +783,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (newLocation) this.currentLocation = newLocation;
 
                 return newLocations;
-            },
-
-            navIndex: {
-                get: function(){
-                    return this.currentIndex;
-                },
-                set: function(newValue){
-                    this.currentIndex = newValue;
-                }
             },
         },
 
@@ -808,8 +793,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.$refs.yonderMap.$mapObject.panTo(coords)
                 this.updateMarker(index);
             },
-            navigate: function(index = this.navIndex, state){
-                console.log('navigate: '+index);
+            navigate: function(state){
+                index = this.navIndex;
                 if(state == 'prev' && index > 0) this.navIndex = index - 1;
                 if(state == 'next' && index < this.maxIndex) this.navIndex = index + 1;
                 this.selectMarker(this.navIndex);
@@ -825,6 +810,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.$refs.marker[index].$markerObject.setIcon(this.selectedMarker);
                 }
                 this.$forceUpdate();
+            },
+            updateIndex: function (index) {
+                this.navIndex = index;
+
             },
             selectMarker: function(index) {
                 // if (!index) index = this.currentIndex;
@@ -853,30 +842,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
 
-                const days = [
-                    'Sun',
-                    'Mon',
-                    'Tue',
-                    'Wed',
-                    'Thu',
-                    'Fri',
-                    'Sat'
-                ];
-
-                const months = [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ];
+                const days = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
+                const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
 
                 const dayIndex = d.getDay();
                 const dayName = days[dayIndex];
@@ -888,12 +855,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     });
 
+    vm.scrollToCard(vm.navIndex)
 
     Vue.nextTick(function () {
-        //vm.updateLocation()
-        console.log('tick '+this.navIndex);
-        vm.scrollToCard(this.navIndex)
-
+        vm.updateIndex(this.navIndex);
     });
 
 });
