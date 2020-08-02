@@ -1,0 +1,194 @@
+---
+---
+@import '../_sass/normalize.scss';
+// http://hugeinc.github.io/flexboxgrid-sass/
+@import '../_sass/flexboxgrid.scss';
+
+html, body {
+    font-family: 'Varela Round', sans-serif;
+    letter-spacing: 0.2px;
+    letter-spacing: 0.01rem;
+}
+a {
+  color: inherit;
+}
+
+hr {
+  opacity: 0.3;
+  margin: 30px auto;
+  border: none;
+  border-top: 1px solid #aaa;
+}
+
+.underline {
+  text-decoration: none;
+  display: inline;
+  text-shadow: 0px 3px 0px white;
+  background-size: 1px 1em;
+  box-shadow:
+    inset 0 -0.01em white,
+    inset 0 -0.06em #000;
+    &-grey {
+      box-shadow:
+      inset 0 -0.01em white,
+      inset 0 -0.06em #999999;
+    }
+    &-blue {
+      box-shadow:
+      inset 0 -0.01em white,
+      inset 0 -0.06em #007bff;
+    }
+}
+.link-image {
+  display: block;
+  text-decoration: none;
+}
+::placeholder {
+    color: gray;
+  }
+.colorful {
+    color: red;
+    &--very {
+        transform: translate-y(30deg);
+        font-weight: bold;
+    }
+}
+.container {
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+
+//$spaceamounts: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 70 75, 100); // Adjust this to include the pixel amounts you need.
+$sides: (top, bottom, left, right); // Leave this variable alone
+@for $i from 0 through 20 {
+    @each $side in $sides {
+      .m#{str-slice($side, 0, 1)}-#{$i*5} {
+        margin-#{$side}: #{$i*5}px !important;
+      }
+    
+      .p#{str-slice($side, 0, 1)}-#{$i*5} {
+        padding-#{$side}: #{$i*5}px !important;
+      }
+    }
+}
+
+.nm-x-20 {
+  margin: 0 -20px;
+}
+
+.no-break {
+  white-space: nowrap;
+}
+
+.wrap-word {
+    white-space: normal;
+}
+
+.nav-list {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    .nav-list-item {
+      display: inline-block;
+      margin-right: 20px;
+    }
+}
+.u-{
+  &w-100 {
+    width: 100%;
+  }
+  &mw-100 {
+    max-width: 100%;
+  }
+  &sh {
+    box-shadow: 
+    3px 4px 3px rgba(0,0,0,0.1), 
+    -3px 2px 3px rgba(0,0,0,0.1), 
+    0px 10px 18px rgba(0,0,0,0.2);
+  }
+  &rounded {
+    border-radius: 30px;
+  }
+}
+.t- {
+  &c-blue {
+    color: #007bff;
+  }
+  &c-grey {
+    color: #999999;
+  }
+}
+
+$ratio: 1;
+
+.t- {
+  @for $i from 0 through 12 {
+    &fs-#{$i} {
+      font-size: (8px * ($i/2)*$ratio);
+      font-size: ($i/2)*$ratio+rem;
+    }
+
+    &lh-#{$i} {
+      line-height: (8px * ($i/2)*$ratio);
+      line-height: ($i/2)*$ratio+rem;
+    }
+  }
+}
+
+$mm-breakpoints:
+  sm 48em 0.8,
+  md 62em 1,
+  lg 75em 1.2;
+
+
+@each $breakpoint in $mm-breakpoints {
+  $name: nth($breakpoint, 1);
+  $size: nth($breakpoint, 2);
+  $ratio: nth($breakpoint, 3);
+  .u-#{$name}-show {
+    display: none;
+  }
+
+  @media only screen and (min-width: $size) {
+    .u-#{$name}-show {
+      display: block;
+    }
+    .t-#{$name}- {
+      @for $i from 0 through 12 {
+        &fs-#{$i} {
+          font-size: (8px * ($i/2)*$ratio);
+          font-size: ($i/2)*$ratio+rem;
+        }
+    
+        &lh-#{$i} {
+          line-height: (8px * ($i/2)*$ratio);
+          line-height: ($i/2)*$ratio+rem;
+        }
+      }
+      &ar {
+        text-align: right;
+      }
+    }
+  }
+}
+
+// @media (prefers-color-scheme: dark) {
+//   html, body {
+//     color: #bbbbbb;
+//     background-color: rgb(38,38,38);
+//   }
+//   img {
+//     opacity: 0.7;
+//     &:hover {
+//       opacity: 1;
+//     }
+//   }
+//   #mm-name {
+//     fill: #bbbbbb;
+//   }
+//   .t-c-blue {
+//     color: #66b0ff;
+//   }
+// }
