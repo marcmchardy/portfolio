@@ -194,4 +194,23 @@ $mm-breakpoints:
 //   .t-c-blue {
 //     color: #66b0ff;
 //   }
+//   .underline {
+//     text-decoration: none;
+//     display: inline;
+//     text-shadow: 0px 3px 0px rgb(38,38,38);
+//     background-size: 1px 1em;
+//     box-shadow:
+//       inset 0 -0.01em rgb(38,38,38),
+//       inset 0 -0.06em #000;
+//       &-grey {
+//         box-shadow:
+//         inset 0 -0.01em rgb(38,38,38),
+//         inset 0 -0.06em #999999;
+//       }
+//       &-blue {
+//         box-shadow:
+//         inset 0 -0.01em rgb(38,38,38),
+//         inset 0 -0.06em #007bff;
+//       }
+//   }
 // }
