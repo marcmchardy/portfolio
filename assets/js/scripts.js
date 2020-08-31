@@ -8,7 +8,7 @@ function processDataUrls(){
     let elements = document.querySelectorAll("[data-url]");
     let url = '';
 
-    elements.forEach(el => {
+    elements.forEach( function(el) {
         url = el.dataset.url;
         el.addEventListener("click", function(){goToUrl(url)}, false);
     });
@@ -28,7 +28,7 @@ multiplier = 0,
 posArray = [];
 
 letters.forEach( function(el, index) {
-    posArray[index] = { y: 0, offsetY: offset(el).top, height: offset(el).bottom - offset(el).top  };
+    posArray[index] = {x: 0, y: 0,  offsetX: offset(el).left, offsetY: offset(el).top, width: offset(el).right - offset(el).left, height: offset(el).bottom - offset(el).top  };
 });
 
 document.addEventListener("mousemove", onMove);
@@ -40,20 +40,29 @@ function update() {
     letters.forEach( function(el, index){
         
         multiplier = 1 - (diff(index, currentEl) * 0.1);
-        diffPos = multiplier * posArray[currentEl].y;
-        posArray[index].y = diffPos;
-        posOpacity = (snapDist - Math.abs(posArray[index].y))*0.01;
+
+        // i think a lot of these references to the array could be moved to standard vars
+        diffPosY = multiplier * posArray[currentEl].y;
+        diffPosX = multiplier * posArray[currentEl].x;
+
+        // Work out which has a greater diff between x and y change, use that in a ternary operater for opacity
+        opacityDiff = (Math.abs(diffPosY) > Math.abs(diffPosX)) ? Math.abs(diffPosY) : Math.abs(diffPosX);
+
+        // work out a percentage of change
+        posOpacity = (snapDist - opacityDiff)/snapDist;
         posOpacity = (posOpacity < 0.1) ? 0.1 : posOpacity;
 
-        letters[index].setAttribute("transform", "translate(0 "+  posArray[index].y  +")");
+        letters[index].setAttribute("transform", "translate( "+ diffPosX + " " + diffPosY  +") ");
+        // svg.setAttribute("style", "transform: rotate3d(1,0.1,1,"+posOpacity+"turn); transform-origin: center;");
         letters[index].setAttribute("opacity", posOpacity);
        
         // if we exceed the snap limit cut the mouse connection and animate to baseline
-        if (Math.abs(posArray[currentEl].y) > snapDist) {   
+        if (Math.abs(posArray[currentEl].y) > snapDist || Math.abs(posArray[currentEl].x) > snapDist*1.5) {   
             // or if we are not the current el but we're not at startY and need to animate back
             connected = false;
             gsap.to( posArray[index] , { 
                 duration: 2,  
+                x: 0,
                 y: 0
             });
         }  
@@ -71,7 +80,8 @@ function onMove(event) {
          if (connected && index == currentEl) {    
              // Kill any active tweens on the point
             gsap.killTweensOf(posArray[currentEl]); 
-            posArray[currentEl].y = (event.pageY - (posArray[currentEl].offsetY + (posArray[currentEl].height / 2)))*2 ; 
+            posArray[currentEl].y = (event.pageY - (posArray[currentEl].offsetY + (posArray[currentEl].height / 2)))*1.5 ; 
+            posArray[currentEl].x = (event.pageX - (posArray[currentEl].offsetX + (posArray[currentEl].width / 2)))*1.5 ; 
         }
     });
 }
@@ -82,5 +92,5 @@ function offset(el) {
     var rect = el.getBoundingClientRect(),
     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return { top: rect.top + scrollTop, bottom: rect.bottom + scrollTop, left: rect.left + scrollLeft }
+    return { top: rect.top + scrollTop, bottom: rect.bottom + scrollTop, left: rect.left + scrollLeft,  right: rect.right + scrollLeft }
 }
