@@ -4,6 +4,7 @@
 // http://hugeinc.github.io/flexboxgrid-sass/
 @import '../_sass/flexboxgrid.scss';
 
+
 html, body {
     font-family: 'Varela Round', sans-serif;
     letter-spacing: 0.2px;
@@ -12,7 +13,12 @@ html, body {
 a {
   color: inherit;
 }
-
+[data-url] {
+  cursor: pointer;
+}
+.masthead {
+  touch-action: none;
+}
 hr {
   opacity: 0.3;
   margin: 30px auto;
@@ -56,20 +62,32 @@ hr {
         font-weight: bold;
     }
 }
-.container {
-    margin: 0 auto;
-    padding: 0 10px;
-}
+// .container {
+//     margin: 0 auto;
+//     padding: 0 10px;
+// }
+
+// @each $breakpoint in $mm-breakpoints {
+//   $name: nth($breakpoint, 1);
+//   $size: nth($breakpoint, 2);
+//   $ratio: nth($breakpoint, 3);
+
+//   @media only screen and (min-width: $size) {
+//     .container {
+//       margin: 0 auto;
+//       padding: 0 10px;
+//     }
+//   }
+
+// }
 
 
-//$spaceamounts: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 70 75, 100); // Adjust this to include the pixel amounts you need.
 $sides: (top, bottom, left, right); // Leave this variable alone
 @for $i from 0 through 20 {
     @each $side in $sides {
       .m#{str-slice($side, 0, 1)}-#{$i*5} {
         margin-#{$side}: #{$i*5}px !important;
       }
-    
       .p#{str-slice($side, 0, 1)}-#{$i*5} {
         padding-#{$side}: #{$i*5}px !important;
       }
@@ -114,29 +132,50 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   &rounded {
     border-radius: 30px;
   }
+  &bg-white {
+    background-color: #ffffff;
+    position: relative;
+  }
+  &relative {
+    position: relative;
+  }
+}
+.profile-photo {
+  z-index: 0;
+  margin-bottom: -180px;
+  margin-left: -40px;
+  transform: rotateZ(-2.5deg);
 }
 .t- {
   &c-blue {
     color: #007bff;
   }
   &c-grey {
-    color: #999999;
+    color: #666666;
   }
 }
 
 $ratio: 1;
 
+.t-light {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+// 12/
 .t- {
-  @for $i from 0 through 12 {
-    &fs-#{$i} {
-      font-size: (8px * ($i/2)*$ratio);
-      font-size: ($i/2)*$ratio+rem;
+  $r: 1;
+  @for $i from 1 through 12 {
+    &fs-xs-#{$i} {
+      font-size: 16px * $r;
+      font-size: $r+rem;
     }
 
-    &lh-#{$i} {
-      line-height: (8px * ($i/2)*$ratio);
-      line-height: ($i/2)*$ratio+rem;
+    &lh-xs-#{$i} {
+      line-height: 16px * $r;
+      line-height: $r+rem;
     }
+    $r: $r + 0.5; 
   }
 }
 
@@ -144,7 +183,7 @@ $mm-breakpoints:
   sm 48em 0.8,
   md 62em 1,
   lg 75em 1.2;
-
+  
 
 @each $breakpoint in $mm-breakpoints {
   $name: nth($breakpoint, 1);
@@ -158,19 +197,21 @@ $mm-breakpoints:
     .u-#{$name}-show {
       display: block;
     }
-    .t-#{$name}- {
-      @for $i from 0 through 12 {
-        &fs-#{$i} {
-          font-size: (8px * ($i/2)*$ratio);
-          font-size: ($i/2)*$ratio+rem;
+    .t-{
+      $r: 1;
+      @for $i from 1 through 12 {
+        &fs-#{$name}-#{$i} {
+          font-size: 16px * $r;
+          font-size: $r+rem;
         }
     
-        &lh-#{$i} {
-          line-height: (8px * ($i/2)*$ratio);
-          line-height: ($i/2)*$ratio+rem;
+        &lh-#{$name}-#{$i} {
+          line-height: 16px * $r;
+          line-height: $r+rem;
         }
+        $r: $r + 0.5; 
       }
-      &ar {
+      &#{$name}-ar {
         text-align: right;
       }
     }
