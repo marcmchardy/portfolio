@@ -7,14 +7,14 @@ title: A selection of work
 <div class="row mb-30 nm-x-20">
 	{% for post in site.posts %}
 	<div class="col-xs-12 col-md-4 mb-40">
-		<a class="underline-none" href="{{ post.url }}" title="{{ post.title }}">
-			<img src="{{post.feature}}" class="u-mw-100 u-w-100 u-sh u-rounded" />
-			<div class="ml-10">
+		<img src="{{post.feature}}"  data-url="{{ post.url }}" class="u-mw-100 u-w-100 u-sh u-rounded" />
+		<div class="ml-10">
+			<a class="underline-none" href="{{ post.url }}" title="{{ post.title }}">
 				<h3 class="t-c-blue mb-10 mt-25 ">{{ post.client }}</h3>
 				<p class="t-fs-xs-2 mt-0 mb-10 ">{{ post.project }}</p>
-				<span class="t-light t-c-grey t-lh-xs-3">{{ post.description }} →</span>
-			</div>
-		</a>
+				<span class="t-light t-c-grey t-lh-xs-3">{{ post.description | truncatewords: 20 }} →</span>
+			</a>
+		</div>
 	</div>
 	{% endfor %}
 </div>

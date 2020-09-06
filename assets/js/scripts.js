@@ -1,17 +1,21 @@
 
 function goToUrl(url){
-    location.href = url;
+   location.href = url;
     // do google analytics stuff here
 }
 
 function processDataUrls(){
-    let elements = document.querySelectorAll("[data-url]");
-    let url = '';
-
-    elements.forEach( function(el) {
-        url = el.dataset.url;
-        el.addEventListener("click", function(){goToUrl(url)}, false);
-    });
+    var elements = document.querySelectorAll("[data-url]");
+    for (var i = 0; i < elements.length; i += 1) {
+        (function () {
+            var url = '';
+            url = elements[i].dataset.url;
+            elements[i].addEventListener(
+                "click", 
+                function(){goToUrl(url)}, false
+            );
+        }());
+    }
 }
 
 processDataUrls();
