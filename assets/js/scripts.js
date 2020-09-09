@@ -1,15 +1,13 @@
 
 function goToUrl(url){
    location.href = url;
-    // do google analytics stuff here
 }
 
 function processDataUrls(){
     var elements = document.querySelectorAll("[data-url]");
     for (var i = 0; i < elements.length; i += 1) {
         (function () {
-            var url = '';
-            url = elements[i].dataset.url;
+            var url = elements[i].dataset.url;
             elements[i].addEventListener(
                 "click", 
                 function(){goToUrl(url)}, false
@@ -21,6 +19,8 @@ function processDataUrls(){
 processDataUrls();
 
 
+// Animated logo from here
+
 gsap.defaults({ease: "elastic(1, 0.25)"});
 
 var svg  = document.querySelector("svg"),
@@ -31,11 +31,18 @@ currentEl = 0,
 multiplier = 0,
 posArray = [],
 snapAllowed = true,
-freshTouchdown = false;
+freshTouchdown = false,
+inputPos = [{x:0, y:0}];
 
-letters.forEach( function(el, index) {
-    posArray[index] = {x: 0, y: 0,  offsetX: offset(el).left, offsetY: offset(el).top, width: offset(el).right - offset(el).left, height: offset(el).bottom - offset(el).top  };
-});
+function letterPositions(){
+    letters.forEach( function(el, index) {
+        posArray[index] = {x: 0, y: 0,  offsetX: offset(el).left, offsetY: offset(el).top, width: offset(el).right - offset(el).left, height: offset(el).bottom - offset(el).top  };
+    });
+};
+
+letterPositions();
+gsap.ticker.add(update);
+update();
 
 document.addEventListener("touchstart", function(){
     freshTouchdown = true;
@@ -46,9 +53,10 @@ document.addEventListener("touchmove", function(event){
 document.addEventListener("mousemove", function(event){
     onMove(event, "mouse")
 });
-
-gsap.ticker.add(update);
-update();
+window.addEventListener("resize", function(event){
+    letterPositions();
+    update();
+});
 
 function snapAllowedTimer(){
     snapAllowed = false;
@@ -93,8 +101,6 @@ function update() {
     });
 }
 
-var inputPos = [{x:0, y:0}];
-
 function onMove(event, input) {
 
     // override to keep the touch check from breaking the mouse interaction
@@ -117,6 +123,8 @@ function onMove(event, input) {
         }
     });
 }
+
+// Utility functions to help us out
 
 function diff(a,b){return Math.abs(a-b);}
 
