@@ -29,21 +29,23 @@ hr {
 .underline {
   text-decoration: none;
   display: inline;
-  text-shadow: 0px 3px 0px white;
-  background-size: 1px 1em;
-  box-shadow:
-    inset 0 -0.01em white,
-    inset 0 -0.06em #000;
-    &-grey {
-      box-shadow:
-      inset 0 -0.01em white,
-      inset 0 -0.06em #999999;
-    }
-    &-blue {
-      box-shadow:
-      inset 0 -0.01em white,
-      inset 0 -0.06em #007bff;
-    }
+  border-color: inherit;
+  border-bottom: 1px solid;
+  // text-shadow: 0px 3px 0px white;
+  // background-size: 1px 1em;
+  // box-shadow:
+  //   inset 0 -0.01em white,
+  //   inset 0 -0.06em #000;
+  //   &-grey {
+  //     box-shadow:
+  //     inset 0 -0.01em white,
+  //     inset 0 -0.06em #999999;
+  //   }
+  //   &-blue {
+  //     box-shadow:
+  //     inset 0 -0.01em white,
+  //     inset 0 -0.06em #007bff;
+  //   }
 }
 .highlight {
   display: inline;
@@ -118,6 +120,32 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     white-space: normal;
 }
 
+.logo {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.35s width ease-in-out;
+  width: 100%;
+  &--small {
+    width: 150px;
+  }
+  &--small-home {
+    width: 150px;
+  }
+  &_container {
+    position: relative;
+  }
+}
+
+.sticky--top {
+  position: sticky;
+  display: block;
+  top: -30px;
+  background: white;
+  z-index: 1;
+}
+
 .nav-list {
     display: inline-block;
     margin: 0;
@@ -127,18 +155,26 @@ $sides: (top, bottom, left, right); // Leave this variable alone
       display: inline-block;
       margin-right: 20px;
     }
+    .nav-list-item_link {
+      &--active {
+        color: #007bff;
+        border-bottom: 2px solid;
+        border-color: #007bff;
+        box-shadow: none;
+      }
+    }
 }
 .u-{
   &nm-left-hard {
-    margin-left: -4rem;
+    margin-left: -2rem;
     @media only screen and (min-width: 1320px) {
-      margin-left: calc(-4rem - ((100vw - 1320px)/2));
+      margin-left: calc(-2rem + 18px - ((100vw - 1320px)/2));
     }
   }
   &nm-right-hard {
     margin-right: -2rem;
     @media only screen and (min-width: 1320px) {
-      margin-right: calc(-2rem - ((100vw - 1320px)/2));
+      margin-right: calc(-2rem + 20px - ((100vw - 1320px)/2));
     }
   }
   &w-100 {
@@ -155,8 +191,20 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   }
   &rounded {
     border-radius: 15px;
+    &--left {
+      border-radius: 15px 0 0 15px;
+    }
+    &--right {
+      border-radius: 0 15px 15px 0;
+    }
     @media only screen and (min-width: 48em) {
       border-radius: 30px;
+      &--left {
+        border-radius: 30px 0 0 30px;
+      }
+      &--right {
+        border-radius: 0 30px 30px 0;
+      }
     }
   }
   &bg-white {
@@ -197,6 +245,8 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     width: 20px;
     margin-right: 15px;
     background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
     opacity: 0.6;
   }
   &-pre-calendar {
@@ -216,16 +266,18 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   width: 100%;
   display: block;
   &-container {
-    border-radius: 0 15px 15px 0;
     padding-left: 0!important;
     overflow: hidden;
-    position: relative;
-    @media only screen and (min-width: 48em) {
-      border-radius: 0 30px 30px 0;    
-    }  
+    position: relative; 
+    margin-left: -2rem;
+    @media only screen and (min-width: 1320px) {
+      margin-left: calc(-2rem - ((100vw - 1320px)/2));
+    }
   }
 }
-
+.profile-heading {
+  font-weight: 100;
+}
 .profile-caption {
     margin-top: 60px;
     @media only screen and (min-width: 48em) {
@@ -297,8 +349,6 @@ $mm-breakpoints:
         // padding-top: $photoPadding;
       }
     }
-
-
 
     .t-{
       $r: 1;

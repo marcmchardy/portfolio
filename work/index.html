@@ -2,9 +2,8 @@
 layout: default
 title: A selection of work
 ---
-<p class="t-fs-xs-2 t-lh-xs-6 mt-0">{{ page.title }}</h2>
 
-<div class="row mb-30 nm-x-20">
+<div class="row mt-60 mb-30 nm-x-20">
 	{% for post in site.posts %}
 	<div class="col-xs-12 col-md-4 mb-40">
 		<img src="{{post.feature}}"  data-url="{{ post.url }}" class="u-mw-100 u-w-100 u-sh u-rounded" />

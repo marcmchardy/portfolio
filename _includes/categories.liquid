@@ -1,16 +1,20 @@
 
 <ul class="nav-list">
-{% if page.dir != '/' %}
- <li class="nav-list-item"><a class="underline" href="/">Home</a></li>
-{% endif %}
+
+ {% comment %} <li class="nav-list-item"><a class="nav-list-item_link underline {% if page.dir == '/' %}nav-list-item_link--active{% endif %}" href="/">Home</a></li> {% endcomment %}
+ 
 {% assign categories_list = site.categories %}
+{% assign current_page = page.dir | remove:'/' %}
+
 {% if categories_list.first[0] == null %}
     {% for category in categories_list %}
-    <li class="nav-list-item"><a class="underline" href="/{{ category | downcase | downcase | url_escape | strip | replace: ' ', '-' }}">{{ category | capitalize | replace: '-', ' '  }} </a></li>
+        {% assign category_name = category | downcase | downcase | url_escape | strip | replace: ' ', '-' %}
+        <li class="nav-list-item"><a class="nav-list-item_link underline {% if current_page == category_name %}nav-list-item_link--active{% endif %}" href="/{{ category_name }}">{{ category | capitalize | replace: '-', ' ' }} </a></li>
     {% endfor %}
 {% else %}
     {% for category in categories_list %}
-    <li class="nav-list-item"><a class="underline" href="/{{ category[0] | downcase | url_escape | strip | replace: ' ', '-' }}">{{ category[0] | capitalize | replace: '-', ' '  }} </a></li>
+        {% assign category_name = category[0] | downcase | url_escape | strip | replace: ' ', '-' %}
+        <li class="nav-list-item"><a class="nav-list-item_link underline {% if current_page == category_name %}nav-list-item_link--active{% endif %}" href="/{{ category_name }}">{{ category[0] | capitalize | replace: '-', ' ' }} </a></li>
     {% endfor %}
 {% endif %}
 {% assign categories_list = nil %}

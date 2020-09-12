@@ -57,6 +57,14 @@ window.addEventListener("resize", function(event){
     letterPositions();
     update();
 });
+window.onload = function() {
+    scrollFunction()
+};
+window.onscroll = function() {
+    scrollFunction()
+    letterPositions();
+    update();
+};
 
 function snapAllowedTimer(){
     snapAllowed = false;
@@ -133,4 +141,17 @@ function offset(el) {
     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     return { top: rect.top + scrollTop, bottom: rect.bottom + scrollTop, left: rect.left + scrollLeft,  right: rect.right + scrollLeft }
+}
+
+var logo = document.querySelector(".logo"),
+header = document.querySelector("#header"),
+shrink_y = 30;
+
+function scrollFunction() {
+    console.log(document.body.scrollTop  || document.documentElement.scrollTop)
+  if (document.body.scrollTop >= shrink_y || document.documentElement.scrollTop >= shrink_y) {
+    logo.classList.add("logo--small-home");
+  } else {
+    logo.classList.remove("logo--small-home");
+  }
 }
