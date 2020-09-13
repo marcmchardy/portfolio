@@ -125,13 +125,31 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   position: absolute;
   top: 0;
   left: 0;
-  transition: 0.35s width ease-in-out;
-  width: 100%;
-  &--small {
-    width: 150px;
+  transition: 0.25s width ease-in, 0.25s top ease-in;
+  width: 115px;
+  @media only screen and (min-width: 48em) {
+    width: 100%;
   }
-  &--small-home {
-    width: 150px;
+  &--home {
+    top: 60px;
+    width: 200px;
+    @media only screen and (min-width: 48em) {
+      top: 0;
+      width: 100%;
+    }
+  }
+  &--small {
+    width: 125px;
+    @media only screen and (min-width: 48em) {
+      width: 150px;
+    }
+  }
+  &--home-small {
+    top: 0;
+    width: 125px;
+    @media only screen and (min-width: 48em) {
+      width: 150px;
+    }
   }
   &_container {
     position: relative;
@@ -141,7 +159,7 @@ $sides: (top, bottom, left, right); // Leave this variable alone
 .sticky--top {
   position: sticky;
   display: block;
-  top: -30px;
+  top: -40px;
   background: white;
   z-index: 1;
 }
@@ -366,6 +384,9 @@ $mm-breakpoints:
       }
       &#{$name}-ar {
         text-align: right;
+      }
+      &#{$name}-al {
+        text-align: left;
       }
     }
   }
