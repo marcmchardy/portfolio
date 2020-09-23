@@ -23,7 +23,7 @@ hr {
   opacity: 0.3;
   margin: 30px auto;
   border: none;
-  border-top: 1px solid #aaa;
+  border-top: 1px solid #ccc;
 }
 
 .underline {
@@ -31,21 +31,6 @@ hr {
   display: inline;
   border-color: inherit;
   border-bottom: 1px solid;
-  // text-shadow: 0px 3px 0px white;
-  // background-size: 1px 1em;
-  // box-shadow:
-  //   inset 0 -0.01em white,
-  //   inset 0 -0.06em #000;
-  //   &-grey {
-  //     box-shadow:
-  //     inset 0 -0.01em white,
-  //     inset 0 -0.06em #999999;
-  //   }
-  //   &-blue {
-  //     box-shadow:
-  //     inset 0 -0.01em white,
-  //     inset 0 -0.06em #007bff;
-  //   }
 }
 .highlight {
   display: inline;
@@ -57,7 +42,6 @@ hr {
   padding-bottom: 2px;
   padding-left: 3px;
   padding-right: 3px;
-  
 }
 .underline-none {
   text-decoration: none;
@@ -76,25 +60,6 @@ hr {
         font-weight: bold;
     }
 }
-// .container {
-//     margin: 0 auto;
-//     padding: 0 10px;
-// }
-
-// @each $breakpoint in $mm-breakpoints {
-//   $name: nth($breakpoint, 1);
-//   $size: nth($breakpoint, 2);
-//   $ratio: nth($breakpoint, 3);
-
-//   @media only screen and (min-width: $size) {
-//     .container {
-//       margin: 0 auto;
-//       padding: 0 10px;
-//     }
-//   }
-
-// }
-
 
 $sides: (top, bottom, left, right); // Leave this variable alone
 @for $i from 0 through 20 {
@@ -118,6 +83,12 @@ $sides: (top, bottom, left, right); // Leave this variable alone
 
 .wrap-word {
     white-space: normal;
+}
+
+.hidden {
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
 }
 
 .logo {
@@ -183,6 +154,9 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     }
 }
 .u-{
+  &link-block {
+    display: block;
+  }
   &nm-left-hard {
     margin-left: -2rem;
     @media only screen and (min-width: 1320px) {
@@ -197,15 +171,16 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   }
   &w-100 {
     width: 100%;
+    display: block;
   }
   &mw-100 {
     max-width: 100%;
   }
   &sh {
     box-shadow: 
-    3px 4px 3px rgba(0,0,0,0.1), 
-    -3px 2px 3px rgba(0,0,0,0.1), 
-    0px 10px 18px rgba(0,0,0,0.2);
+    3px 4px 3px rgba(0,0,0,0.05), 
+    -3px 2px 3px rgba(0,0,0,0.05), 
+    0px 10px 18px rgba(0,0,0,0.15);
   }
   &rounded {
     border-radius: 15px;
@@ -326,7 +301,6 @@ $ratio: 1;
 .t-xs-ar {
   text-align: right;
 }
-// 12/
 .t- {
   $r: 1;
   @for $i from 1 through 12 {
@@ -362,11 +336,6 @@ $mm-breakpoints:
     .u-#{$name}-show {
       display: block;
     }
-    .u-profile-pt {
-      &-#{$name} {
-        // padding-top: $photoPadding;
-      }
-    }
 
     .t-{
       $r: 1;
@@ -392,41 +361,52 @@ $mm-breakpoints:
   }
 }
 
-// @media (prefers-color-scheme: dark) {
-//   html, body {
-//     color: #bbbbbb;
-//     background-color: rgb(38,38,38);
-//   }
-//   img {
-//     opacity: 0.7;
-//     &:hover {
-//       opacity: 1;
-//     }
-//   }
-//   #mm-name {
-//     fill: #bbbbbb;
-//   }
-//   .t-c-blue {
-//     color: #66b0ff;
-//   }
-//   .underline {
-//     text-decoration: none;
-//     display: inline;
-//     text-shadow: 0px 3px 0px rgb(38,38,38);
-//     background-size: 1px 1em;
-//     box-shadow:
-//       inset 0 -0.01em rgb(38,38,38),
-//       inset 0 -0.06em #000;
-//       &-grey {
-//         box-shadow:
-//         inset 0 -0.01em rgb(38,38,38),
-//         inset 0 -0.06em #999999;
-//       }
-//       &-blue {
-//         box-shadow:
-//         inset 0 -0.01em rgb(38,38,38),
-//         inset 0 -0.06em #007bff;
-//       }
-//   }
-// }
+@media (prefers-color-scheme: dark) {
+  html, body {
+    color: #bbbbbb;
+    background-color: rgb(38,38,38);
+  }
+  img {
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .sticky--top {
+    background-color: rgb(38,38,38);
+  }
+  #mm-name {
+    fill: #bbbbbb;
+  }
 
+  .nav-list {
+    .nav-list-item_link {
+      &--active {
+        color: #66b0ff;
+      }
+    }
+  }
+  .t-c-blue {
+    color: #66b0ff;
+  }
+  .t-c-grey {
+      color: #cccccc;
+  }
+  .highlight {
+    border-bottom: 1px solid #007baa; 
+    background-color:  #007bff7a;
+  }
+  .u-btn {
+    &:hover {
+      color: #dedede;
+      box-shadow: 0 3px 0 #cccccc;
+    }
+  }
+  .icon {
+    &:before {
+      content: '';
+      opacity: 1;
+      filter: brightness(2);
+    }
+  }
+}

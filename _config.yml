@@ -13,16 +13,11 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Your awesome title
+title: Marc McHardy. Digital product designer.
 short: Web, app, and interactive design, visual design, development
 involvement_title: My involvement in this project
 email: hi@marcmchardy.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Web, app, and interactive design, visual design, development.
-  Marc is a digital product designer and problem solver. With over ten 
-  years in the industry he creates websites, apps, and other experiences 
-  that are clear, easy to use, and a little bit fun.
-  
+description: Product designer and problem solver. 10+ years experience creating websites, apps, and other interactive experiences that are clear, easy to use, and a little bit fun. From helping to shape your idea through to UX, design, and build, I can help you out.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://marcmchardy.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: marc_mchardy

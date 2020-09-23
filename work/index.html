@@ -1,6 +1,7 @@
 ---
 layout: default
 title: A selection of work
+description: Websites, apps, and other experiences that I've had a hand in helping to create over the years
 ---
 
 <div class="row mt-60 mb-30 nm-x-20">
@@ -10,10 +11,13 @@ title: A selection of work
 		<div class="ml-10">
 			<a class="underline-none" href="{{ post.url }}" title="{{ post.title }}">
 				<h3 class="t-c-blue mb-10 mt-25 ">{{ post.client }}</h3>
-				<p class="t-fs-xs-2 mt-0 mb-10 ">{{ post.project }}</p>
-				<span class="t-light t-c-grey t-lh-xs-3">{{ post.description | truncatewords: 20 }} →</span>
+				<h4 class="t-fs-xs-2 mt-0 mb-10 ">{{ post.project }}</h4>
+				<p class="t-light t-c-grey t-lh-xs-3">{{ post.description | truncatewords: 21 }} →</p>
 			</a>
 		</div>
 	</div>
 	{% endfor %}
 </div>
+
+<hr>
+

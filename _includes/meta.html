@@ -1,49 +1,67 @@
-    <!-- Priority tags. These must come first. -->
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge; chrome=1"> <!-- Render Chrome if available or using latest version of Internet Explorer (Recommended). -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <!-- Document Title -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge; chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if page.dir == '/' %}
+
+    <title>{{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}"> 
+    <meta property="og:image"            content="{{site.url}}/assets/images/marc_6.jpg">  
+    <meta property="og:site_name"        content="{{ site.title }}"> 
+    <meta property="og:title"            content="Home"> 
+    <meta property="og:description"      content="{{ site.description }}"> 
+
+    {% else %}
+
     <title>{{ page.title }}</title>
-    <!-- Base URL to use for all relative URLs contained within the document -->
-    <!-- <base href="https://example.com/"> -->
+    <meta name="description" content="{{ page.description }}"> 
+    <meta property="og:image"            content="{{site.url}}{{page.feature}}">  
+    <meta property="og:site_name"        content="{{ site.title }}"> 
+    <meta property="og:title"            content="{{ page.title }}"> 
+    <meta property="og:description"      content="{{ page.description }}"> 
 
-    <!-- Search Eengine and Browser Meta Tags. -->
-    <meta name="description" content=""> <!-- Keep under 500 characters -->
-    <meta name="abstract"    content=""> <!-- Keep uder 100 characters -->
-    
+    {% endif %}
 
-    <!-- Open Graph Meta Tags (ogp.me) -->
-    <meta property="og:image"            content="http://example.com/image.jpg">  <!-- Web page thumbnail -->
-    <meta property="og:site_name"        content="Site Name">                     <!-- Web site title -->
-    <meta property="og:title"            content="Page Title">                    <!-- Web page title -->
-    <meta property="og:description"      content="Description of this web page">  <!-- Web page description -->
-    <meta property="og:type"             content="website">                       <!-- Content type ["product", "blog", "website", "book", "movie", ... ] -->
-    <!-- <meta property="og:url"              content="http://example.com/index.html"> Url to this web page -->
-    <meta property="og:locale"           content="en_NZ">                         <!-- Main Language -->
-    <meta property="og:locality"         content="Wellington">                        <!-- Locality -->
-    <meta property="og:region"           content="Wellington">                        <!-- Region -->
-    <meta property="og:country-name"     content="NZ">                            <!-- Country -->
-    <meta property="og:email"            content="marc@marcmchardy.com">             <!-- Contact email -->
-    <!-- Twitter Meta Tags. -->
-    <meta name="twitter:card" content="summary">
+    <meta property="og:type"             content="website">
+    <meta property="og:url"              content="{{site.url}}{{ page.url }}"> 
+    <meta property="og:locale"           content="en_NZ">                       
+    <meta property="og:locality"         content="Wellington">
+    <meta property="og:region"           content="Wellington"> 
+    <meta property="og:country-name"     content="NZ">
+    <meta property="og:email"            content="marc@marcmchardy.com"> 
+
     <meta name="twitter:site" content="@marc_mchardy">
     <meta name="twitter:creator" content="@marc_mchardy">
     <meta name="twitter:url" content="https://twitter.com/marc_mchardy">
-    <meta name="twitter:title" content="Marc McHardy Designer">
-    <meta name="twitter:description" content="Content description less than 200 characters">
-    <meta name="twitter:image" content="https://example.com/image.jpg">
-    <!-- Pinterest. -->
 
-    <!-- Favicon Meta Tags.  -->
-    <!-- <link rel="icon" href="/assets/favicon.ico">
+
+    {% if page.dir == '/' %}
+
+    <meta name="twitter:title" content="{{ site.title }}">
+    <meta name="twitter:description" content="{{ site.description }}">
+
+    {% else %}
+
+    <meta name="twitter:title" content="{{ site.title }} - {{ page.title }}">
+    <meta name="twitter:description" content="{{ page.description }}">
+
+    {% endif %}
+
+    <link rel="icon" href="/assets/favicon.ico">
     <link rel="icon" href="/assets/favicon-16.png"  sizes="16x16"   type="image/png">
     <link rel="icon" href="/assets/favicon-32.png"  sizes="32x32"   type="image/png">
     <link rel="icon" href="/assets/favicon-48.png"  sizes="48x48"   type="image/png">
     <link rel="icon" href="/assets/favicon-62.png"  sizes="62x62"   type="image/png">
-    <link rel="icon" href="/assets/favicon-128.png" sizes="128x128" type="image/png">-->
+    <link rel="icon" href="/assets/favicon-128.png" sizes="128x128" type="image/png">
     <link rel="icon" href="/assets/favicon-192.png" sizes="192x192" type="image/png"> 
 
-    <!-- Humans -->
-    <link rel="author" href="/humans.txt">
-    <link rel="copyright" href="/copyright.html">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43360356-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-43360356-1');
+    </script>
+
     
