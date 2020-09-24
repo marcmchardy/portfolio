@@ -9,6 +9,7 @@ twitter_username: marc_mchardy
 github_username:  marcmchardy
 
 theme: null
+destination: docs
 
 # Build settings
 markdown: kramdown
