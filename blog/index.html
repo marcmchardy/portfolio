@@ -1,18 +1,20 @@
 ---
 layout: default
-title: A selection of work
-description: Websites, apps, and other experiences that I've had a hand in helping to create over the years
+title: Thoughts & things
+description: A collection of posts and thoughts about design, and product development
 ---
 
 <div class="row mt-60 mb-30 nm-x-20">
-	{% for post in site.categories.work %}
+	{% for post in site.categories.blog %}
 	<div class="col-xs-12 col-md-4 mb-40">
 		<img src="{{post.feature}}"  data-url="{{ post.url }}" class="u-mw-100 u-w-100 u-sh u-rounded" />
-		<div class="ml-10">
+	</div>
+	<div class="col-xs-12 col-md-6 mb-40">
+		<div class="ml-20">
 			<a class="underline-none" href="{{ post.url }}" title="{{ post.title }}">
 				<h3 class="t-c-blue mb-10 mt-25 ">{{ post.client }}</h3>
 				<h4 class="t-fs-xs-2 mt-0 mb-10 ">{{ post.project }}</h4>
-				<p class="t-light t-c-grey t-lh-xs-3">{{ post.description | truncatewords: 21 }} →</p>
+				<p class="t-light t-c-grey t-lh-xs-3">{{ post.description | truncatewords: 40 }} →</p>
 			</a>
 		</div>
 	</div>

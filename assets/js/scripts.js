@@ -3,6 +3,14 @@ function goToUrl(url){
    location.href = url;
 }
 
+function gaEventClick(category, label) {
+    ga('send', 'event', {
+      eventCategory: category,
+      eventAction: 'click',
+      eventLabel: label
+    });
+}
+
 function processDataUrls(){
     var elements = document.querySelectorAll("[data-url]");
     for (var i = 0; i < elements.length; i += 1) {
@@ -11,6 +19,18 @@ function processDataUrls(){
             elements[i].addEventListener(
                 "click", 
                 function(){goToUrl(url)}, false
+            );
+        }());
+    }
+    
+    var gaElements = document.querySelectorAll("[data-ga]");
+    for (var i = 0; i < gaElements.length; i += 1) {
+        (function () {
+            var category = gaElements[i].dataset.ga, 
+            label = gaElements[i].dataset.gal;
+            gaElements[i].addEventListener(
+                "click", 
+                function(){gaEventClick(category, label)}, false
             );
         }());
     }

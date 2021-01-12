@@ -44,6 +44,30 @@ hr {
   padding-bottom: 2px;
   padding-left: 3px;
   padding-right: 3px;
+
+  position: relative;
+  cursor: pointer;
+}
+.highlight_tooltip {
+  visibility: hidden;
+  width: 400px;
+  background-color: black;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 10px 20px;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.highlight:hover .highlight_tooltip {
+  visibility: visible;
 }
 .underline-none {
   text-decoration: none;
@@ -212,7 +236,8 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   &list {
     padding: 0;
     &_item {
-      list-style: inside circle;
+      list-style: outside circle;
+      margin-left: 1.2em;
     }
   }
   &btn {
