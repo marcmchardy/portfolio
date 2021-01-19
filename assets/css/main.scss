@@ -177,10 +177,6 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     list-style: none;
     .nav-list-item {
       display: inline-block;
-      margin-left: 20px;
-      &:first-child {
-        margin-left: 0;
-      }
     }
     .nav-list-item_link {
       &--active {
@@ -190,6 +186,12 @@ $sides: (top, bottom, left, right); // Leave this variable alone
         box-shadow: none;
       }
     }
+}
+.nav-ml {
+  margin-left: 10px;
+  @media only screen and (min-width: 48em) {
+    margin-left: 20px;
+  }
 }
 .u-{
   &link-block {
@@ -238,8 +240,11 @@ $sides: (top, bottom, left, right); // Leave this variable alone
       }
     }
   }
-  &overflow-clip {
+  &overflow-clip-small {
     overflow: hidden;
+    @media only screen and (min-width: 48em) {
+      overflow: visible;
+    }
   }
   &bg-white {
     background-color: #ffffff;
