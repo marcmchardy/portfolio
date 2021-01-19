@@ -50,20 +50,29 @@ hr {
 }
 .highlight_tooltip {
   visibility: hidden;
-  width: 400px;
   background-color: black;
   border: 1px solid rgba(255,255,255,0.2);
   color: #fff;
   text-align: left;
   border-radius: 6px;
   padding: 10px 20px;
-
-  /* Position the tooltip */
-  position: absolute;
-  top: 110%;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 1;
+
+  left: 10px;
+  right: 10px;
+  position: fixed;
+  top: calc(100% - 10px);
+  transform: translateY(-100%);
+
+  @media only screen and (min-width: 48em) {
+  /* Position the tooltip */
+    width: 400px;
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
 }
 
 .highlight:hover .highlight_tooltip {
@@ -136,14 +145,14 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     }
   }
   &--small {
-    width: 125px;
+    width: 105px;
     @media only screen and (min-width: 48em) {
       width: 150px;
     }
   }
   &--home-small {
     top: 0;
-    width: 125px;
+    width: 105px;
     @media only screen and (min-width: 48em) {
       width: 150px;
     }
@@ -168,7 +177,10 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     list-style: none;
     .nav-list-item {
       display: inline-block;
-      margin-right: 20px;
+      margin-left: 20px;
+      &:first-child {
+        margin-left: 0;
+      }
     }
     .nav-list-item_link {
       &--active {
@@ -225,6 +237,9 @@ $sides: (top, bottom, left, right); // Leave this variable alone
         border-radius: 0 30px 30px 0;
       }
     }
+  }
+  &overflow-clip {
+    overflow: hidden;
   }
   &bg-white {
     background-color: #ffffff;
