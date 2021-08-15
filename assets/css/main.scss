@@ -194,6 +194,9 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   }
 }
 .u-{
+  &align-end {
+    align-self: flex-end;
+  }
   &link-block {
     display: block;
   }
