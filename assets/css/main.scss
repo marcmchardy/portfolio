@@ -351,55 +351,60 @@ $ratio: 1;
 .t-xs-ar {
   text-align: right;
 }
+
+$rootSize: 6;
 .t- {
-  $r: 1;
+  $r1: $rootSize;
   @for $i from 1 through 12 {
     &fs-xs-#{$i} {
-      font-size: 16px * $r;
-      font-size: $r+rem;
+      font-size: $r1+px;
+      font-size: ($r1/16)+rem;
+      line-height: ($r1*1.5)+px;
+      line-height: (($r1/16)*1.5)+rem;
     }
 
     &lh-xs-#{$i} {
-      line-height: 16px * $r;
-      line-height: $r+rem;
+      line-height: $r1+px;
+      line-height: ($r1/16)+rem;
     }
-    $r: $r + 0.5; 
+    $r1: $r1 + $rootSize; 
   }
 }
 
 $mm-breakpoints:
-  sm 48em 0.8 44%,
-  md 62em 1 33%,
-  lg 75em 1.2 33%;
+  sm 48em 1,
+  md 62em 1.25,
+  lg 75em 1.5;
+
+
 
 @each $breakpoint in $mm-breakpoints {
   $name: nth($breakpoint, 1);
   $size: nth($breakpoint, 2);
   $ratio: nth($breakpoint, 3);
-  $photoPadding: nth($breakpoint, 4);
   .u-#{$name}-show {
     display: none;
   }
 
- 
   @media only screen and (min-width: $size) {
     .u-#{$name}-show {
       display: block;
     }
 
     .t-{
-      $r: 1;
+      $r2: $rootSize;
       @for $i from 1 through 12 {
         &fs-#{$name}-#{$i} {
-          font-size: 16px * $r;
-          font-size: $r+rem;
+          font-size: $r2+px;
+          font-size: ($r2/16)+rem;
+          line-height: ($r2*1.5)+px;
+          line-height: (($r2/16)*1.5)+rem;
         }
-    
         &lh-#{$name}-#{$i} {
-          line-height: 16px * $r;
-          line-height: $r+rem;
+          line-height: ($r2*1.2)+px;
+          line-height: (($r2/16)*1.2)+rem;
         }
-        $r: $r + 0.5; 
+        $r2: $r2 + $rootSize; 
       }
       &#{$name}-ar {
         text-align: right;
