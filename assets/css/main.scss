@@ -225,6 +225,10 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     -3px 2px 3px rgba(0,0,0,0.05), 
     0px 10px 18px rgba(0,0,0,0.15);
   }
+  &-border-bottom {
+    border-color: inherit;
+    border-bottom: 1px solid;
+  }
   &rounded {
     border-radius: 15px;
     &--left {
@@ -260,6 +264,10 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     padding: 0;
     &_item {
       list-style: outside circle;
+      margin-left: 1.2em;
+    }
+    &_item--number {
+      list-style: outside auto;
       margin-left: 1.2em;
     }
   }
