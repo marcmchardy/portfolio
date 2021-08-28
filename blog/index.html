@@ -4,12 +4,12 @@ title: Thoughts & things
 description: A collection of posts and thoughts about design, and product development
 ---
 
-<div class="row mt-60 mb-30 nm-x-20">
+<div class="row mt-60 mb-20 nm-x-20">
 	{% for post in site.categories.blog %}
-	<div class="col-xs-12 col-md-4 mb-40">
+	<div class="col-xs-12 col-md-4 mb-20">
 		<img src="{{post.feature}}"  data-url="{{ post.url }}" class="u-mw-100 u-w-100 u-sh u-rounded" />
 	</div>
-	<div class="col-xs-12 col-md-6 mb-40">
+	<div class="col-xs-12 col-md-6 mb-20">
 		<div class="ml-20">
 			<a class="underline-none" href="{{ post.url }}" title="{{ post.title }}">
 				<h3 class="t-c-blue mb-10 mt-25 ">{{ post.subject }}</h3>

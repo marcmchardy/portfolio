@@ -1,19 +1,19 @@
 ---
 layout: default
-title: Thoughts & things
-description: A collection of posts and thoughts about design, and product development
+title: Cookbook
+description: A collection of recipes that I like to cook, mostly simple, always yum
 ---
 
-<div class="mt-60 mb-30 nm-x-20">
+<div class="mt-60 mb-20 nm-x-20">
 	{% for post in site.categories.cookbook %}
-	<div class="row">
-		<div class="col-xs-12 col-md-3 mb-40">
+	<div class="row mb-20">
+		<div class="col-xs-12 col-md-3 mb-20">
 			<img src="{{post.feature_small}}"  data-url="{{ post.url }}" class="u-mw-100 u-w-100 u-sh u-rounded" />
 		</div>
-		<div class="col-xs-12 col-md-6 mb-40">
+		<div class="col-xs-12 col-md-6 mb-20">
 			<div class="ml-20">
 				<a class="underline-none" href="{{ post.url }}" title="{{ post.title }}">
-					<h3 class="t-c-blue mb-10 mt-30 ">{{ post.subject }}</h3>
+					<h3 class="t-c-blue mb-10 mt-20 ">{{ post.subject }}</h3>
 					<h4 class="t-fs-xs-4 mt-0 mb-10 ">{{ post.title }}</h4>
 					<p class="t-light t-c-grey t-fs-xs-3">{{ post.description | truncatewords: 40 }} →</p>
 				</a>
