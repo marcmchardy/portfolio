@@ -7,12 +7,16 @@
 {% if categories_list.first[0] == null %}
     {% for category in categories_list %}
         {% assign category_name = category | downcase | downcase | url_escape | strip | replace: ' ', '-' %}
-        <li class="nav-list-item"><a class="nav-list-item_link underline-none nav-ml {% if current_page == category_name %}nav-list-item_link--active{% endif %}" href="/{{ category_name }}">{{ category | capitalize | replace: '-', ' ' }} </a></li>
+            {% if category_name != "cookbook" %}
+                <li class="nav-list-item"><a class="nav-list-item_link underline-none nav-ml {% if current_page == category_name %}nav-list-item_link--active{% endif %}" href="/{{ category_name }}">{{ category | capitalize | replace: '-', ' ' }} </a></li>
+            {% endif %}
     {% endfor %}
 {% else %}
     {% for category in categories_list %}
         {% assign category_name = category[0] | downcase | url_escape | strip | replace: ' ', '-' %}
-        <li class="nav-list-item"><a class="nav-list-item_link underline-none nav-ml {% if current_page == category_name %}nav-list-item_link--active{% endif %}" href="/{{ category_name }}">{{ category[0] | capitalize | replace: '-', ' ' }} </a></li>
+        {% if category_name != "cookbook" %}
+            <li class="nav-list-item"><a class="nav-list-item_link underline-none nav-ml {% if current_page == category_name %}nav-list-item_link--active{% endif %}" href="/{{ category_name }}">{{ category[0] | capitalize | replace: '-', ' ' }} </a></li>
+        {% endif %}
     {% endfor %}
 {% endif %}
 {% assign categories_list = nil %}
